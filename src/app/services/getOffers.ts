@@ -59,7 +59,7 @@ export async function getInfoJobsOffers () {
     return {
       id,
       title,
-      province: province.value.toString(),
+      province: province.value,
       experienceMin: experienceMin.value,
       link,
       published
