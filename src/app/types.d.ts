@@ -4,5 +4,5 @@ export interface Offer {
   province: string
   experienceMin: string
   link: string
-  published: string
+  published: Date
 }
