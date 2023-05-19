@@ -5,9 +5,9 @@ Proyecto para hackaton de infojobs de midudev
 Un generador de carta de presentaciòn de acuerdo a las habilidades del candidato y requerimientos de la oferta generado con IA (Cohere API)
 
 # Techstack
-Astro <br>
+Next <br>
 Tailwind <br>
-Svelte
+React
 
 # Apis
 Infojobs <br>
