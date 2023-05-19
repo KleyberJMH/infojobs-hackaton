@@ -59,7 +59,7 @@ export function ListOfOffers (props: {
         <TableHead>
           <TableRow>
             <TableHeaderCell>Puesto</TableHeaderCell>
-            <TableHeaderCell>Publicado</TableHeaderCell>
+
             <TableHeaderCell>Provincia</TableHeaderCell>
             <TableHeaderCell>Experiencia</TableHeaderCell>
             <TableHeaderCell className='text-center'>Acción</TableHeaderCell>
@@ -75,7 +75,7 @@ export function ListOfOffers (props: {
                 }}
               >
                 <TableCell>{item.title}</TableCell>
-                <TableCell>{item.published}</TableCell>
+
                 <TableCell>{item.province}</TableCell>
                 <TableCell>{item.experienceMin}</TableCell>
                 <TableCell className='text-center'>
