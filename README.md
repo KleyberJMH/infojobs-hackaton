@@ -1,8 +1,14 @@
-Para levantarlo, instala las dependencias y ejecuta `npm run dev`.
+# infojobs-hackaton
+Proyecto para hackaton de infojobs de midudev
 
-Ten en cuenta que falta el `.env.local` con las variables de entorno necesarias para que funcione el proyecto. Puedes encontrar un ejemplo en el archivo `.env.example`.
+# Idea
+Un generador de carta de presentaciòn de acuerdo a las habilidades del candidato y requerimientos de la oferta generado con IA (Cohere API)
 
-```bash
-INFOJOBS_TOKEN="bWlkdWdhOnFzNW5LcHAzOE4oSA=="
-OPENAI_TOKEN="aaaaa"
-```
+# Techstack
+Next <br>
+Tailwind <br>
+React
+
+# Apis
+Infojobs <br>
+Cohere
