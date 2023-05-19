@@ -29,10 +29,9 @@ export async function GET (request: Request) {
 
   const data = {
     model: 'command',
-    prompt: `Write a cover letter about the description as a JSON response with the next format:
-    {"message": [message]}
-    Description: "${description}"`,
-    max_token:3000,
+    prompt: `Write a cover letter about the description:
+    Description: '${description}'`,
+    max_token:300,
     temperature: 0.3,
     k: 0,
     p: 1,
@@ -53,10 +52,10 @@ export async function GET (request: Request) {
 
 
   const result = response.generations[0].text ?? ''
-  
+  const json = {"message" : `${result}`}
 
   try {
-    console.log({result})
+    console.log(result)
     return NextResponse.json({result})
   } catch {
     return new Response('No se ha podido transformar el JSON', { status: 500 })
