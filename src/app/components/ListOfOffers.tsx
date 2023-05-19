@@ -75,7 +75,7 @@ export function ListOfOffers (props: {
                 }}
               >
                 <TableCell>{item.title}</TableCell>
-                <TableCell>{item.published}</TableCell>
+                <TableCell>{item.published.toString()}</TableCell>
                 <TableCell>{item.province}</TableCell>
                 <TableCell>{item.experienceMin}</TableCell>
                 <TableCell className='text-center'>
