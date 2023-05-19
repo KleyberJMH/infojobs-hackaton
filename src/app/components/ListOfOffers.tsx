@@ -4,7 +4,9 @@ import { Card, Flex, Title, Badge, Table, TableHead, TableRow, TableHeaderCell, 
 
 import { Offer } from '../types'
 import { Fragment, useState } from 'react'
-import { Modal } from './Modal'
+import { Score } from './Score'
+
+const infoJobsToken = process.env.INFOJOBS_TOKEN ?? ''
 
 export function ListOfOffers (props: {
   offers: Offer[]
@@ -24,13 +26,13 @@ export function ListOfOffers (props: {
 
     const res = await fetch(`/api/check-description?id=${id}`, {
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        Authorization: `Basic ${infoJobsToken}`
       }
     })
     
     const json = await res.json()
-    console.log(json)
-    console.log(res)
+    
     
 
     setCoverLetter(prevCoverLetter => ({
@@ -90,7 +92,7 @@ export function ListOfOffers (props: {
                   </Button>
                 </TableCell>
               </TableRow>
-              <Modal {...coverLetter[item.id]} />
+              <Score {...coverLetter[item.id]} />
             </Fragment>
           ))}
         </TableBody>
