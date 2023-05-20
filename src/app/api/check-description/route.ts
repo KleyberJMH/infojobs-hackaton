@@ -12,7 +12,7 @@ async function getOfferDescriptionById (id: string) {
     }
   })
 
-  const {description}  = await res.json()
+  const { description } = await res.json()
 
   return description
 }
@@ -28,32 +28,32 @@ export async function GET (request: Request) {
   const data = {
     model: 'command',
     prompt: `Write a cover letter about the description:
-    Description: '${description}'`,
-    max_token:300,
+    Description: ${description}`,
+    max_token: 300,
     temperature: 0.3,
     k: 0,
     p: 1,
-    frequency_penalty:0,
-    presence_penalty:0,
+    frequency_penalty: 0,
+    presence_penalty: 0,
     return_likelihoods: 'NONE'    
   }
 
-  const response = await fetch(cohereUrl,{
-    method:'POST',
+  const response = await fetch(cohereUrl, {
+    method: 'POST',
     headers: {
         Authorization: `BEARER ${cohereToken}`,
         "Content-Type": 'application/json',
         "Cohere-Version": '2022-12-06'
     },
     body: JSON.stringify(data)
-}).then(res => res.json())
+  }).then(res => res.json())
 
   const result = response.generations[0].text ?? ''
-  const json = {"message" : `${result}`}
+  const json = { "message" : `${result}` }
 
   try {
     console.log(result)
-    return NextResponse.json({result})
+    return NextResponse.json({ result })
   } catch {
     return new Response('No se ha podido transformar el JSON', { status: 500 })
   }
