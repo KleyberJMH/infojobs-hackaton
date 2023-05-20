@@ -18,7 +18,8 @@ export function Score (props: {
             className='max-w-md whitespace-pre-wrap'
             title='Resultado del análisis'
             icon={TrendingUpIcon}
-            color={'emerald'}>
+            color='emerald'
+          >
             {message}
           </Callout>
         </Flex>

@@ -6,6 +6,7 @@ interface APIResultOffer {
   province: Category
   city: string
   link: string
+  description: string
   category: Category
   contractType: Category
   subcategory: Category

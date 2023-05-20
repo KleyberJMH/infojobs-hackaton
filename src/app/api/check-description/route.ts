@@ -23,7 +23,7 @@ export async function GET (request: Request) {
 
   if (id == null) return new Response('Missing id', { status: 400 })
 
-  const description = await getOfferDescriptionById(id)
+  const description: string = await getOfferDescriptionById(id)
 
   const data = {
     model: 'command',
@@ -35,25 +35,25 @@ export async function GET (request: Request) {
     p: 1,
     frequency_penalty: 0,
     presence_penalty: 0,
-    return_likelihoods: 'NONE'    
+    return_likelihoods: 'NONE'
   }
 
   const response = await fetch(cohereUrl, {
     method: 'POST',
     headers: {
-        Authorization: `BEARER ${cohereToken}`,
-        "Content-Type": 'application/json',
-        "Cohere-Version": '2022-12-06'
+      Authorization: `BEARER ${cohereToken}`,
+      'Content-Type': 'application/json',
+      'Cohere-Version': '2022-12-06'
     },
     body: JSON.stringify(data)
-  }).then(res => res.json())
+  }).then(async res => await res.json())
 
-  const result = response.generations[0].text ?? ''
-  const json = { "message" : `${result}` }
+  const result: string = response.generations[0].text ?? ''
+  const json = { message: `${result}` }
 
   try {
-    console.log(result)
-    return NextResponse.json({ result })
+    console.log(json)
+    return NextResponse.json(json)
   } catch {
     return new Response('No se ha podido transformar el JSON', { status: 500 })
   }

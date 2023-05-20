@@ -30,7 +30,6 @@ export function ListOfOffers (props: {
         Authorization: `Basic ${infoJobsToken}`
       }
     })
-    
     const json = await res.json()
 
     setCoverLetter(prevCoverLetter => ({
@@ -67,7 +66,8 @@ export function ListOfOffers (props: {
               <TableRow
                 className='transition-colors cursor-pointer hover:bg-sky-300' onClick={() => {
                   window.open(item.link, '_blank')
-                }}>
+                }}
+              >
                 <TableCell>{item.title}</TableCell>
 
                 <TableCell>{item.province}</TableCell>
@@ -80,7 +80,8 @@ export function ListOfOffers (props: {
                     onClick={async (event) => {
                       event.stopPropagation()
                       await handleClick(item.id)
-                    }} size='xs' variant='secondary' color='gray'>
+                    }} size='xs' variant='secondary' color='gray'
+                  >
                     Generar
                   </Button>
                 </TableCell>
