@@ -1,10 +1,8 @@
 import { NextResponse } from 'next/server'
 
-
 const infoJobsToken = process.env.INFOJOBS_TOKEN ?? ''
 const cohereToken = process.env.COHERE_TOKEN ?? ''
 const cohereUrl = process.env.COHERE_URL ?? ''
-
 
 async function getOfferDescriptionById (id: string) {
   const res = await fetch(`https://api.infojobs.net/api/7/offer/${id}`, {
@@ -49,7 +47,6 @@ export async function GET (request: Request) {
     },
     body: JSON.stringify(data)
 }).then(res => res.json())
-
 
   const result = response.generations[0].text ?? ''
   const json = {"message" : `${result}`}

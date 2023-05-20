@@ -1,9 +1,7 @@
-import { Card, Flex, Text, Metric, TableCell, TableRow, CategoryBar, Callout } from '@tremor/react'
+import { Flex, TableCell, TableRow, Callout } from '@tremor/react'
 import {
-  TrendingUpIcon,
-  TrendingDownIcon
+  TrendingUpIcon
 } from '@heroicons/react/solid'
-const subCategoryPercentageValues = [10, 25, 45, 20]
 
 export function Score (props: {
   message: string
@@ -15,20 +13,15 @@ export function Score (props: {
   return (
     <TableRow className='flex'>
       <TableCell colSpan={4}>
-
         <Flex>
-  
-
           <Callout
             className='max-w-md whitespace-pre-wrap'
             title='Resultado del análisis'
             icon={TrendingUpIcon}
-            color={'emerald'}
-          >
+            color={'emerald'}>
             {message}
           </Callout>
         </Flex>
-
       </TableCell>
     </TableRow>
   )

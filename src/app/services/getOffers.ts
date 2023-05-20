@@ -54,7 +54,7 @@ export async function getInfoJobsOffers () {
   const { items }: { items: APIResultOffer[] } = await res.json()
 
   const listOfOffers = items.map(item => {
-    const { id, title, province, experienceMin, link, published } = item
+    const { id, title, province, experienceMin, link } = item
 
     return {
       id,
@@ -62,7 +62,6 @@ export async function getInfoJobsOffers () {
       province: province.value,
       experienceMin: experienceMin.value,
       link
-
     }
   })
 

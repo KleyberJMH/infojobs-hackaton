@@ -13,19 +13,15 @@ export function Modal (props: {
     return (
       <TableRow className='flex'>
         <TableCell colSpan={4}>
-  
           <Flex>
-  
           <Callout
         className="h-12 mt-4"
         title="Carta de presentación"
         icon={ExclamationIcon}
-        color="teal"
-      >
+        color="teal">
         {message}
       </Callout>
           </Flex>
-  
         </TableCell>
       </TableRow>
     )

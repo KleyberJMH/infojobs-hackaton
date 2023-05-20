@@ -32,8 +32,6 @@ export function ListOfOffers (props: {
     })
     
     const json = await res.json()
-    
-    
 
     setCoverLetter(prevCoverLetter => ({
       ...prevCoverLetter,
@@ -52,14 +50,11 @@ export function ListOfOffers (props: {
         <Title>Ofertas de trabajo de InfoJobs</Title>
         <Badge color='gray'>{offers.length}</Badge>
       </Flex>
-
       <Text className='mt-2'>Las últimas ofertas de trabajo</Text>
-
       <Table className='mt-6'>
         <TableHead>
           <TableRow>
             <TableHeaderCell>Puesto</TableHeaderCell>
-
             <TableHeaderCell>Provincia</TableHeaderCell>
             <TableHeaderCell>Experiencia</TableHeaderCell>
             <TableHeaderCell className='text-center'>Acción</TableHeaderCell>
@@ -72,8 +67,7 @@ export function ListOfOffers (props: {
               <TableRow
                 className='transition-colors cursor-pointer hover:bg-sky-300' onClick={() => {
                   window.open(item.link, '_blank')
-                }}
-              >
+                }}>
                 <TableCell>{item.title}</TableCell>
 
                 <TableCell>{item.province}</TableCell>
@@ -86,8 +80,7 @@ export function ListOfOffers (props: {
                     onClick={async (event) => {
                       event.stopPropagation()
                       await handleClick(item.id)
-                    }} size='xs' variant='secondary' color='gray'
-                  >
+                    }} size='xs' variant='secondary' color='gray'>
                     Generar
                   </Button>
                 </TableCell>
