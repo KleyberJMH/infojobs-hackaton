@@ -25,7 +25,6 @@ Cohere.
 - Instala dependencias
 - Crea .env.local 
 ```
-COHERE_URL="https://api.cohere.ai/generate"
 COHERE_TOKEN="TU API KEY"
 INFOJOBS_TOKEN="TU API KEY"
 ```
