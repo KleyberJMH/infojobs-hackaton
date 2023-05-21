@@ -10,9 +10,9 @@ Cómo usuario recurrente de infojobs he tenido el problema de no saber que escri
 ## Roadmap 📆
 - ✅ Mostrar lista de ofertas laborales.<br>
 - ✅ Generar una carta de presentacion general para la oferta (en inglés).<br>
-- ☑️ Generar una carta de presentacion personalizada con la informacion del candidato.<br>
-- ☑️ Traducir el resultado de la carta de presentación a español.<br>
-- ☑️ Agregar boton de copiado rapido "Copy on clipboard".
+- ❗ Generar una carta de presentacion personalizada con la informacion del candidato.<br>
+- ❗ Traducir el resultado de la carta de presentación a español.<br>
+- ❗ Agregar boton de copiado rapido "Copy on clipboard".
 
 ## Techstack 🚀
 Nextjs. <br>
