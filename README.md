@@ -2,7 +2,7 @@
 Proyecto para hackaton de infojobs de midudev.<br>
 
 ![](https://api.checklyhq.com/v1/badges/checks/8cf2ee2e-9908-4300-8bd5-fd07bcb14441?style=for-the-badge&theme=dark) <br><br>
-[![](https://img.shields.io/badge/-Demo-black?style=)](https://infojobs-hackaton-kleyberjmh.vercel.app/)
+[![](https://img.shields.io/badge/-Demo-lightgreen?style=for-the-badge&theme=dark)](https://infojobs-hackaton-kleyberjmh.vercel.app/)
 
 ## Idea 💡
 Cómo usuario recurrente de infojobs he tenido el problema de no saber que escribir en las cartas de presentación que envío conjunto a mi CV, muchas veces ni siquiera adjunto una presentación, lo cual disminuye la posibilidad de llamar la atención de los reclutadores, por lo que decidí crear un generador de carta de presentaciòn de acuerdo a las habilidades del candidato y requerimientos de la oferta generado con IA (Cohere API).
