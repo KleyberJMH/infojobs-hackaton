@@ -16,7 +16,7 @@ export function Score (props: {
         <Flex>
           <Callout
             className='max-w-md whitespace-pre-wrap'
-            title='Resultado del análisis'
+            title='Carta de presentación'
             icon={TrendingUpIcon}
             color='emerald'
           >
