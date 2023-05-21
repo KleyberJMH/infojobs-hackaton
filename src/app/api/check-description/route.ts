@@ -1,8 +1,10 @@
 import { NextResponse } from 'next/server'
+import cohere from 'cohere-ai'
 
 const infoJobsToken = process.env.INFOJOBS_TOKEN ?? ''
 const cohereToken = process.env.COHERE_TOKEN ?? ''
-const cohereUrl = process.env.COHERE_URL ?? ''
+
+cohere.init(cohereToken)
 
 async function getOfferDescriptionById (id: string) {
   const res = await fetch(`https://api.infojobs.net/api/7/offer/${id}`, {
@@ -25,34 +27,22 @@ export async function GET (request: Request) {
 
   const description: string = await getOfferDescriptionById(id)
 
-  const data = {
-    model: 'command',
-    prompt: `Write a cover letter about the description:
-    Description: ${description}`,
-    max_token: 300,
+  const response = await cohere.generate({
+    model: 'command-xlarge-nightly',
+    prompt: `Write a cover letter for a job application in english using this description '${description}'`,
+    max_tokens: 300,
     temperature: 0.3,
     k: 0,
     p: 1,
-    frequency_penalty: 0,
-    presence_penalty: 0,
+    stop_sequences: [],
     return_likelihoods: 'NONE'
-  }
-
-  const response = await fetch(cohereUrl, {
-    method: 'POST',
-    headers: {
-      Authorization: `BEARER ${cohereToken}`,
-      'Content-Type': 'application/json',
-      'Cohere-Version': '2022-12-06'
-    },
-    body: JSON.stringify(data)
-  }).then(async res => await res.json())
-
-  const result: string = response.generations[0].text ?? ''
-  const json = { message: `${result}` }
+  })
+  const resultado: string = response.body.generations[0].text
+  console.log(resultado)
+  const json = { message: `${resultado}` }
 
   try {
-    console.log(json)
+    console.log(json.message)
     return NextResponse.json(json)
   } catch {
     return new Response('No se ha podido transformar el JSON', { status: 500 })
