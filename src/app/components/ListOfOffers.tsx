@@ -14,9 +14,11 @@ export function ListOfOffers (props: {
   const { offers } = props
 
   const [loading, setLoading] = useState<{ [key: string]: boolean }>({})
-  const [coverLetter, setCoverLetter] = useState<{ [key: string]: {
-    message: string
-  } }>({})
+  const [coverLetter, setCoverLetter] = useState<{
+    [key: string]: {
+      message: string
+    }
+  }>({})
 
   const handleClick = async (id: string) => {
     setLoading(prevLoading => ({
@@ -45,7 +47,7 @@ export function ListOfOffers (props: {
 
   return (
     <Card>
-      <Flex justifyContent='start' className='space-x-2'>
+      <Flex justifyContent='start' className='space-x-4'>
         <Title>Ofertas de trabajo de InfoJobs</Title>
         <Badge color='gray'>{offers.length}</Badge>
       </Flex>
@@ -53,9 +55,9 @@ export function ListOfOffers (props: {
       <Table className='mt-6'>
         <TableHead>
           <TableRow>
-            <TableHeaderCell>Puesto</TableHeaderCell>
-            <TableHeaderCell>Provincia</TableHeaderCell>
-            <TableHeaderCell>Experiencia</TableHeaderCell>
+            <TableHeaderCell className='max-w-xs'>Puesto</TableHeaderCell>
+            <TableHeaderCell className='max-w-xs'>Provincia</TableHeaderCell>
+            <TableHeaderCell className='max-w-xs'>Experiencia</TableHeaderCell>
             <TableHeaderCell className='text-center'>Acción</TableHeaderCell>
           </TableRow>
         </TableHead>
@@ -68,10 +70,10 @@ export function ListOfOffers (props: {
                   window.open(item.link, '_blank')
                 }}
               >
-                <TableCell>{item.title}</TableCell>
+                <TableCell className='max-w-xs'>{item.title}</TableCell>
 
-                <TableCell>{item.province}</TableCell>
-                <TableCell>{item.experienceMin}</TableCell>
+                <TableCell className='max-w-xs'>{item.province}</TableCell>
+                <TableCell className='max-w-xs'>{item.experienceMin}</TableCell>
                 <TableCell className='text-center'>
                   <Button
                     disabled={Boolean(coverLetter[item.id])}
