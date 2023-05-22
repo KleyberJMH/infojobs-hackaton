@@ -26,8 +26,13 @@ export function Score (props: {
                 tooltip='Copiar en portapapeles'
                 onClick={(event) => {
                   event.stopPropagation()
-                  navigator.clipboard.writeText(`${message}`)
-                  alertCopy()
+                  navigator.clipboard.writeText(`${message}`).then(
+                    () => {
+                      alertCopy()
+                    },
+                    () => {
+                    }
+                  )
                 }}
               />
             </AccordionHeader>
