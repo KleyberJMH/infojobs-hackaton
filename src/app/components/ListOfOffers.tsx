@@ -1,10 +1,11 @@
 'use client'
 
-import { Card, Flex, Title, Badge, Table, TableHead, TableRow, TableHeaderCell, TableBody, TableCell, Button, Text } from '@tremor/react'
-
+import { Card, Flex, Title, TextInput, Badge, Table, TableHead, TableRow, TableHeaderCell, TableBody, TableCell, Button, Icon } from '@tremor/react'
+import { getInfoJobsOffers } from '../services/getOffers'
 import { Offer } from '../types'
-import { Fragment, useState } from 'react'
+import { Fragment, useState, useRef } from 'react'
 import { Score } from './Score'
+import { SearchIcon } from '@heroicons/react/solid'
 
 const infoJobsToken = process.env.INFOJOBS_TOKEN ?? ''
 
@@ -19,6 +20,25 @@ export function ListOfOffers (props: {
       message: string
     }
   }>({})
+
+  const [offersList, setOffersList] = useState<Offer[]>(offers)
+
+  const searchBar = useRef<any>(null)
+  const searchOffers = async () => {
+    if (searchBar.current?.value !== null) {
+      const query: string = searchBar.current.value
+      await getInfoJobsOffers(query).then(
+        (result) => {
+          alert(query)
+          setOffersList(result) // tambien puede ser setOffersList(result) si es que result es un array de objetos.
+        },
+        () => {
+          alert(query)
+          return offersList
+        }
+      )
+    }
+  }
 
   const handleClick = async (id: string) => {
     setLoading(prevLoading => ({
@@ -47,11 +67,19 @@ export function ListOfOffers (props: {
 
   return (
     <Card>
-      <Flex justifyContent='start' className='space-x-4'>
-        <Title>Ofertas de trabajo de InfoJobs</Title>
-        <Badge color='gray'>{offers.length}</Badge>
+      <Flex className='flex space-x-2'>
+        <Flex className='flex-wrap space-x-2' justifyContent='start'>
+          <Title className='shrink'>Ofertas de trabajo de InfoJobs</Title>
+          <Badge color='gray'>{offers.length}</Badge>
+        </Flex>
+        <TextInput ref={searchBar} className='max-w-md justify-items-end shrink' placeholder='Search...' />
+        <Icon
+          size='md'
+          icon={SearchIcon}
+          variant='light'
+          onClick={searchOffers}
+        />
       </Flex>
-      <Text className='mt-2'>Las últimas ofertas de trabajo</Text>
       <Table className='mt-6'>
         <TableHead>
           <TableRow>
@@ -70,7 +98,7 @@ export function ListOfOffers (props: {
                   window.open(item.link, '_blank')
                 }}
               >
-                <TableCell className='max-w-xs'>{item.title}</TableCell>
+                <TableCell className='max-w-xs truncate'>{item.title}</TableCell>
 
                 <TableCell className='max-w-xs'>{item.province}</TableCell>
                 <TableCell className='max-w-xs'>{item.experienceMin}</TableCell>

@@ -1,6 +1,6 @@
 const infoJobsToken = process.env.INFOJOBS_TOKEN ?? ''
 
-interface APIResultOffer {
+export interface APIResultOffer {
   id: string
   title: string
   province: Category
@@ -44,8 +44,8 @@ interface Category {
   value: string
 }
 
-export async function getInfoJobsOffers () {
-  const res = await fetch('https://api.infojobs.net/api/7/offer?category=informatica-telecomunicaciones', {
+export async function getInfoJobsOffers (query: string = '') {
+  const res = await fetch(`https://api.infojobs.net/api/7/offer?sortBy=published&q=${query}`, {
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Basic ${infoJobsToken}`
