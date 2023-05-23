@@ -2,12 +2,27 @@
 
 import { ListOfOffers } from './components/ListOfOffers'
 import { getInfoJobsOffers } from './services/getOffers'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Offer } from './types'
 
 export default async function Home () {
-  const listOfOffers = await getInfoJobsOffers()
-  const [offersList, setOffersList] = useState<Offer[]>(listOfOffers ?? '')
+  const [offersList, setOffersList] = useState<Offer[]>([])
+
+  useEffect(() => {
+    const a = async () => {
+      await fetchData()
+    }
+    console.log(a)
+  }, [])
+
+  const fetchData = async () => {
+    try {
+      const result = await getInfoJobsOffers()
+      setOffersList(result)
+    } catch (error) {
+      console.log('Error fetching data:', error)
+    }
+  }
 
   return (
     <>
