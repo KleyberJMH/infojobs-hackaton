@@ -45,7 +45,7 @@ interface Category {
 }
 
 export async function getInfoJobsOffers (query: string = '') {
-  const res = await fetch(`https://api.infojobs.net/api/7/offer?sortBy=published&q=${query}`, {
+  const res = await fetch(`https://api.infojobs.net/api/7/offer?q=${query}`, {
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Basic ${infoJobsToken}`

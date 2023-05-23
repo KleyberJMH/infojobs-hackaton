@@ -27,16 +27,9 @@ export function ListOfOffers (props: {
   const searchOffers = async () => {
     if (searchBar.current?.value !== null) {
       const query: string = searchBar.current.value
-      await getInfoJobsOffers(query).then(
-        (result) => {
-          alert(query)
-          setOffersList(result) // tambien puede ser setOffersList(result) si es que result es un array de objetos.
-        },
-        () => {
-          alert(query)
-          return offersList
-        }
-      )
+      alert(query)
+      const result = await getInfoJobsOffers(query)
+      setOffersList(result)
     }
   }
 
