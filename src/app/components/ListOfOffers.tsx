@@ -30,6 +30,8 @@ export function ListOfOffers (props: {
       alert(query)
       const result = await getInfoJobsOffers(query)
       setOffersList(result)
+    } else {
+      return offersList
     }
   }
 
