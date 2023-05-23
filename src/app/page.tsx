@@ -1,8 +1,13 @@
+'use client'
+
 import { ListOfOffers } from './components/ListOfOffers'
 import { getInfoJobsOffers } from './services/getOffers'
+import { useState } from 'react'
+import { Offer } from './types'
 
 export default async function Home () {
   const listOfOffers = await getInfoJobsOffers()
+  const [offersList, setOffersList] = useState<Offer[]>(listOfOffers ?? '')
 
   return (
     <>
@@ -11,7 +16,7 @@ export default async function Home () {
         <p>Se ha copiado la carta en el portapapeles.</p>
       </div>
       <main className='max-w-[1500px] px-4 mx-auto pb-24'>
-        <ListOfOffers offers={listOfOffers} />
+        <ListOfOffers offersList={offersList} setOffersList={setOffersList} />
       </main>
     </>
   )
