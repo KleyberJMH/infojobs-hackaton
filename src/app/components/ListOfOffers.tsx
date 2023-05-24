@@ -3,16 +3,17 @@
 import { Card, Flex, Title, TextInput, Badge, Table, TableHead, TableRow, TableHeaderCell, TableBody, TableCell, Button, Icon } from '@tremor/react'
 import { getInfoJobsOffers } from '../services/getOffers'
 import { Offer } from '../types'
-import { Fragment, useState, useRef } from 'react'
+import { Fragment, useState, useRef, useEffect } from 'react'
 import { Score } from './Score'
 import { SearchIcon } from '@heroicons/react/solid'
 
 const infoJobsToken = process.env.INFOJOBS_TOKEN ?? ''
 
 export function ListOfOffers (props: {
-  offers: Offer[]
+  offersList: Offer[]
+  setOffersList: any
 }) {
-  const { offers } = props
+  const { offersList, setOffersList } = props
 
   const [loading, setLoading] = useState<{ [key: string]: boolean }>({})
   const [coverLetter, setCoverLetter] = useState<{
@@ -20,21 +21,7 @@ export function ListOfOffers (props: {
       message: string
     }
   }>({})
-
-  const [offersList, setOffersList] = useState<Offer[]>(offers)
-
-  const searchBar = useRef<any>(null)
-  const searchOffers = async () => {
-    if (searchBar.current?.value !== null) {
-      const query: string = searchBar.current.value
-      alert(query)
-      const result = await getInfoJobsOffers(query)
-      setOffersList(result)
-    } else {
-      return offersList
-    }
-  }
-
+  const [queryString, setQueryString] = useState('')
   const handleClick = async (id: string) => {
     setLoading(prevLoading => ({
       ...prevLoading,
@@ -60,19 +47,35 @@ export function ListOfOffers (props: {
     }))
   }
 
+  const searchBar = useRef<any>(null)
+
+  useEffect(() => {
+    let ignore = false
+    setQueryString('nodejs')
+    setOffersList([])
+    getInfoJobsOffers(queryString).then(result => {
+      if (!ignore) {
+        setOffersList(result)
+      }
+    }).catch(error => { console.log('error fetch the offers:', error) })
+    return () => { ignore = true }
+  }, [offersList])
+
   return (
     <Card>
       <Flex className='flex space-x-2'>
         <Flex className='flex-wrap space-x-2' justifyContent='start'>
           <Title className='shrink'>Ofertas de trabajo de InfoJobs</Title>
-          <Badge color='gray'>{offers.length}</Badge>
+          <Badge color='gray'>{offersList.length}</Badge>
         </Flex>
         <TextInput ref={searchBar} className='max-w-md justify-items-end shrink' placeholder='Search...' />
         <Icon
           size='md'
           icon={SearchIcon}
           variant='light'
-          onClick={searchOffers}
+          onClick={() => {
+            setQueryString(searchBar.current.value)
+          }}
         />
       </Flex>
       <Table className='mt-6'>
@@ -86,7 +89,7 @@ export function ListOfOffers (props: {
         </TableHead>
 
         <TableBody>
-          {offers.map(item => (
+          {offersList.map(item => (
             <Fragment key={item.id}>
               <TableRow
                 className='transition-colors cursor-pointer hover:bg-sky-300' onClick={() => {

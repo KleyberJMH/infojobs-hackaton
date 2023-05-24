@@ -43,9 +43,9 @@ interface Category {
   id: number
   value: string
 }
-
+const url = process.env.NODE_ENV === 'production' ? 'https://infojobs-hackaton-kleyberjmh.vercel.app' : 'http://localhost:3000'
 export async function getInfoJobsOffers (query: string = '') {
-  const res = await fetch(`https://api.infojobs.net/api/7/offer?q=${query}`, {
+  const res = await fetch(`${url}/api/getOffers?q=${query}`, {
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Basic ${infoJobsToken}`
