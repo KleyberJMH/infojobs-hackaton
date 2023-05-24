@@ -49,7 +49,6 @@ export function ListOfOffers () {
     }
     setQueryString(queryString)
     getOffers(queryString).then(result => {
-      console.log(result)
       setOffersList(result)
     }).catch(error => { console.log('error fetch the offers:', error) })
   }, [queryString])

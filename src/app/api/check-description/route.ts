@@ -29,20 +29,19 @@ export async function GET (request: Request) {
 
   const response = await cohere.generate({
     model: 'command-xlarge-nightly',
-    prompt: `Write a cover letter for a job application in english using this description '${description}'`,
+    prompt: `Give me only a cover letter for a job application making sure to tell your skills and why i could bring value for the company in english using this description:'${description}'`,
     max_tokens: 300,
     temperature: 0.3,
-    k: 0,
-    p: 1,
+    k: 36,
     stop_sequences: [],
-    return_likelihoods: 'NONE'
+    return_likelihoods: 'GENERATION'
   })
   const resultado: string = response.body.generations[0].text
+  // Traducir
   console.log(resultado)
   const json = { message: `${resultado}` }
 
   try {
-    console.log(json.message)
     return NextResponse.json(json)
   } catch {
     return new Response('No se ha podido transformar el JSON', { status: 500 })
