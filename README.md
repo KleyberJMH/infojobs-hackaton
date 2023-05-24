@@ -4,15 +4,15 @@
 
 Proyecto para la hackaton de infojobs y midudev.<br>
 ## Tabla de contenido
- - [Idea](#Idea)
- - [Roadmap](#Roadmap)
- - [Tecnologías usadas](#tecnologias)
+ - [Idea](#idea)
+ - [Roadmap](#lista-de-tareas)
+ - [Tecnologías usadas](#tecnologias-utilizadas)
  - [Instalación](#instalacion)
 
-## Idea 💡
+## Idea💡
 Cómo usuario recurrente de infojobs he tenido el problema de no saber que escribir en las cartas de presentación que envío conjunto a mi CV, muchas veces ni siquiera adjunto una presentación, lo cual disminuye la posibilidad de llamar la atención de los reclutadores, por lo que decidí crear un generador de carta de presentaciòn de acuerdo a las habilidades del candidato y requerimientos de la oferta generado con IA (Cohere API).
 
-## Lista de tareas 📆
+## Lista de tareas📆
 - ✅ Mostrar lista de ofertas laborales.<br>
 - ✅ Generar una carta de presentacion general para la oferta (en inglés).<br>
 - ✅ Agregar boton de copiado rapido "Copy on clipboard".<br>
@@ -22,14 +22,14 @@ Cómo usuario recurrente de infojobs he tenido el problema de no saber que escri
 - ❗ Traducir el resultado de la carta de presentación a español.<br>
 - ❗ Agregar paginación.
 
-## Tecnologías utilizadas 🚀
+## Tecnologias utilizadas🚀
 - NextJs. <br>
 - Tailwind CSS. <br>
 - Tremor.<br>
 - API Infojobs. <br>
 - SDK Cohere.<br>
 
-## Instalación ⚙️
+## Instalacion⚙️
 - Clona el repositorio.
 ```
 git clone https://github.com/KleyberJMH/infojobs-hackaton
