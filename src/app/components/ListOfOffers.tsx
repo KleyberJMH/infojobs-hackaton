@@ -59,7 +59,7 @@ export function ListOfOffers (props: {
       }
     }).catch(error => { console.log('error fetch the offers:', error) })
     return () => { ignore = true }
-  }, [offersList])
+  }, [queryString])
 
   return (
     <Card>
