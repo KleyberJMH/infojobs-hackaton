@@ -1,20 +1,16 @@
 'use client'
 
 import { Card, Flex, Title, TextInput, Badge, Table, TableHead, TableRow, TableHeaderCell, TableBody, TableCell, Button, Icon } from '@tremor/react'
-import { getInfoJobsOffers } from '../services/getOffers'
 import { Offer } from '../types'
 import { Fragment, useState, useRef, useEffect } from 'react'
+import { getInfoJobsOffers } from '../services/getOffers'
 import { Score } from './Score'
 import { SearchIcon } from '@heroicons/react/solid'
 
 const infoJobsToken = process.env.INFOJOBS_TOKEN ?? ''
 
-export function ListOfOffers (props: {
-  offersList: Offer[]
-  setOffersList: any
-}) {
-  const { offersList, setOffersList } = props
-
+export function ListOfOffers () {
+  const [offersList, setOffersList] = useState<Offer[]>([])
   const [loading, setLoading] = useState<{ [key: string]: boolean }>({})
   const [coverLetter, setCoverLetter] = useState<{
     [key: string]: {
@@ -47,19 +43,18 @@ export function ListOfOffers (props: {
     }))
   }
 
-  const searchBar = useRef<any>(null)
-
   useEffect(() => {
-    let ignore = false
-    setQueryString('nodejs')
-    setOffersList([])
-    getInfoJobsOffers(queryString).then(result => {
-      if (!ignore) {
-        setOffersList(result)
-      }
+    const getOffers = async (query: string) => {
+      return await getInfoJobsOffers(query)
+    }
+    setQueryString(queryString)
+    getOffers(queryString).then(result => {
+      console.log(result)
+      setOffersList(result)
     }).catch(error => { console.log('error fetch the offers:', error) })
-    return () => { ignore = true }
   }, [queryString])
+
+  const searchBar = useRef<any>(null)
 
   return (
     <Card>
@@ -74,7 +69,7 @@ export function ListOfOffers (props: {
           icon={SearchIcon}
           variant='light'
           onClick={() => {
-            setQueryString(searchBar.current.value)
+            setQueryString(searchBar.current.value ?? queryString)
           }}
         />
       </Flex>
