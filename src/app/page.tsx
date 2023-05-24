@@ -19,7 +19,7 @@ export default async function Home () {
       }
     }).catch(error => { console.log('error fetch the offers:', error) })
     return () => { ignore = true }
-  }, [queryString])
+  }, [])
   return (
     <>
       <div id='toast' className='fixed bottom-2 left-2 z-40 bg-blue-100 border-l-4 border-blue-500 text-blue-700 p-4' role='alert'>
