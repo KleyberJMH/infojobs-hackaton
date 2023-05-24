@@ -12,9 +12,9 @@ Cómo usuario recurrente de infojobs he tenido el problema de no saber que escri
 - ✅ Generar una carta de presentacion general para la oferta (en inglés).<br>
 - ✅ Agregar boton de copiado rapido "Copy on clipboard".<br>
 - ✅ Agregar búsqueda y filtro para encontrar mejor la oferta que busco.<br>
+- ✅ Mejorar el prompt para que genere mejores cartas.<br>
 - ❗ Generar una carta de presentacion personalizada con la informacion del candidato.<br>
 - ❗ Traducir el resultado de la carta de presentación a español.<br>
-- ❗ Mejorar el prompt para que genere mejores cartas.<br>
 - ❗ Agregar paginación.
 
 ## Techstack 🚀
