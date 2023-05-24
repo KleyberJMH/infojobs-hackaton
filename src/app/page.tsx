@@ -7,23 +7,19 @@ import { Offer } from './types'
 
 export default async function Home () {
   const [offersList, setOffersList] = useState<Offer[]>([])
+  const [queryString, setQueryString] = useState('')
 
   useEffect(() => {
-    const a = async () => {
-      await fetchData()
-    }
-    console.log(a)
-  }, [])
-
-  const fetchData = async () => {
-    try {
-      const result = await getInfoJobsOffers()
-      setOffersList(result)
-    } catch (error) {
-      console.log('Error fetching data:', error)
-    }
-  }
-
+    let ignore = false
+    setQueryString('javascript')
+    setOffersList([])
+    getInfoJobsOffers(queryString).then(result => {
+      if (!ignore) {
+        setOffersList(result)
+      }
+    }).catch(error => { console.log('error fetch the offers:', error) })
+    return () => { ignore = true }
+  }, [queryString])
   return (
     <>
       <div id='toast' className='fixed bottom-2 left-2 z-40 bg-blue-100 border-l-4 border-blue-500 text-blue-700 p-4' role='alert'>

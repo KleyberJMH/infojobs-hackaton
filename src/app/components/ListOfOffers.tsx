@@ -3,7 +3,7 @@
 import { Card, Flex, Title, TextInput, Badge, Table, TableHead, TableRow, TableHeaderCell, TableBody, TableCell, Button, Icon } from '@tremor/react'
 import { getInfoJobsOffers } from '../services/getOffers'
 import { Offer } from '../types'
-import { Fragment, useState, useRef } from 'react'
+import { Fragment, useState, useRef, useEffect } from 'react'
 import { Score } from './Score'
 import { SearchIcon } from '@heroicons/react/solid'
 
@@ -21,7 +21,7 @@ export function ListOfOffers (props: {
       message: string
     }
   }>({})
-
+  const [queryString, setQueryString] = useState('')
   const handleClick = async (id: string) => {
     setLoading(prevLoading => ({
       ...prevLoading,
@@ -48,24 +48,18 @@ export function ListOfOffers (props: {
   }
 
   const searchBar = useRef<any>(null)
-  const searchOffers = async () => {
-    if (searchBar.current?.value !== '') {
-      const query: string = searchBar.current.value
-      const result = await getInfoJobsOffers(query)
-      setOffersList(result)
-    } else {
-      return offersList
-    }
-  }
-  /* const searchOffers = async () => {
-    if (searchBar.current?.value !== null) {
-      const query: string = searchBar.current.value
-      const result = await getInfoJobsOffers(query)
-      setOffersList(result)
-    } else {
-      return offersList
-    }
-  } */
+
+  useEffect(() => {
+    let ignore = false
+    setQueryString('nodejs')
+    setOffersList([])
+    getInfoJobsOffers(queryString).then(result => {
+      if (!ignore) {
+        setOffersList(result)
+      }
+    }).catch(error => { console.log('error fetch the offers:', error) })
+    return () => { ignore = true }
+  }, [offersList])
 
   return (
     <Card>
@@ -79,7 +73,9 @@ export function ListOfOffers (props: {
           size='md'
           icon={SearchIcon}
           variant='light'
-          onClick={searchOffers}
+          onClick={() => {
+            setQueryString(searchBar.current.value)
+          }}
         />
       </Flex>
       <Table className='mt-6'>
