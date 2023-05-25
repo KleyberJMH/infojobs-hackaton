@@ -72,6 +72,7 @@ export function ListOfOffers () {
           }}
         />
       </Flex>
+      <a href={process.env.INFOJOBS_LOGIN_URL}>Login</a>
       <Table className='mt-6'>
         <TableHead>
           <TableRow>
