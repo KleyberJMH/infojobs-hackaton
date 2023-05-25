@@ -1,5 +1,6 @@
 import NextAuth from 'next-auth'
 
+const infoJobsToken = process.env.INFOJOBS_TOKEN ?? ''
 const infoJobsId = process.env.INFOJOBS_ID ?? ''
 const callbackUri = process.env.CALLBACK_URI ?? ''
 const scopes = process.env.SCOPES ?? ''
@@ -11,7 +12,8 @@ const handler = NextAuth({
       name: 'InfoJobs',
       type: 'oauth',
       authorization: `https://www.infojobs.net/api/oauth/user-authorize/index.xhtml?scope=${scopes}&client_id=${infoJobsId}&redirect_uri=${callbackUri}&response_type=code`,
-      userinfo: '',
+      token: infoJobsToken,
+      userinfo: callbackUri,
       profile (profile) {
         return {
           id: profile.id
