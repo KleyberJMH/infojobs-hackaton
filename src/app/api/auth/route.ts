@@ -1,23 +1,12 @@
-import { NextResponse } from 'next/server'
+const infoJobsId = process.env.INFOJOBS_ID ?? ''
+const infoJobsSecret = process.env.INFOJOBS_SECRET ?? ''
+const redirectUri = process.env.REDIRECT_URI ?? ''
 
-export async function GET (request: Request) {
+export async function POST (request: Request) {
   const { searchParams } = new URL(request.url)
-  const query = searchParams.get('code')
+  const code = searchParams.get('code')
 
-  /* const res = await fetch(`https://api.infojobs.net/api/7/offer?q=${query ?? ''}`, {
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Basic ${infoJobsToken}` // sacas el infojobs token, etc.
-    }
-  })
-   const data = await res.json()
-  */
-
-  console.log(query)
-
-  try {
-    return NextResponse.json({ code: query })
-  } catch {
-    return new Response('No se pudo acceder a la información', { status: 500 })
-  }
+  const res = await fetch(`https://www.infojobs.net/oauth/authorize?grant_type=authorization_code&client_id=${infoJobsId}&client_secret=${infoJobsSecret}&code=${code}&redirect_uri=${redirectUri}`)
+  const data = await res.json()
+  console.log({ data })
 }
