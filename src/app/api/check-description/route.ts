@@ -29,12 +29,12 @@ export async function GET (request: Request) {
 
   const response = await cohere.generate({
     model: 'command-xlarge-nightly',
-    prompt: `Give me only a cover letter for a job application making sure to tell your skills and why i could bring value for the company in english using this description:'${description}'`,
-    max_tokens: 300,
-    temperature: 0.3,
-    k: 36,
+    prompt: `Generate a cover letter for a job application. Highlight your relevant skills and experience, as well as your enthusiasm for the job. Make sure to mention how your experience and achievements align with the requirements of the job description and how you can contribute to the success of the company.\nUsing this description: '${description}'`,
+    max_tokens: 1000,
+    temperature: 0.5,
+    k: 342,
     stop_sequences: [],
-    return_likelihoods: 'GENERATION'
+    return_likelihoods: 'NONE'
   })
   const resultado: string = response.body.generations[0].text
   // Traducir
