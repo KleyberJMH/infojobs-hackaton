@@ -6,6 +6,11 @@ const redirectUri = process.env.REDIRECT_URI ?? ''
 const scopes = process.env.SCOPES ?? ''
 const infoJobsSecret = process.env.INFOJOBS_SECRET ?? ''
 
+interface Session {
+  accessToken?: string,
+  refreshToken?: string
+}
+
 const handler = NextAuth({
   providers: [
     InfojobsProvider({
@@ -24,8 +29,8 @@ const handler = NextAuth({
       return token
     },
     async session ({ session, token }) {
-      session.accessToken = token.accessToken
-      session.refreshToken = token.refreshToken
+      session.accessToken = token.accessToken as string
+      session.refreshToken = token.refreshToken as string
       return session
     }
   }
