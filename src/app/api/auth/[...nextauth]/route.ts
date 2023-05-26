@@ -8,7 +8,7 @@ const infoJobsSecret = process.env.INFOJOBS_SECRET ?? ''
 
 declare module 'next-auth' {
   interface Session {
-    accessToken?: string,
+    accessToken?: string
     refreshToken?: string
   }
 }
