@@ -9,19 +9,19 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@auth/core": "^0.7.1",
+    "@auth/core": "0.7.1",
     "@heroicons/react": "1.0.6",
-    "@tremor/react": "^2.6.2",
+    "@tremor/react": "2.6.2",
     "@types/node": "20.1.5",
     "@types/react": "18.2.6",
     "@types/react-dom": "18.2.4",
     "autoprefixer": "10.4.14",
-    "cohere-ai": "^6.2.1",
+    "cohere-ai": "6.2.1",
     "eslint": "8.40.0",
     "eslint-config-next": "13.4.2",
-    "infojobs-next-auth-provider": "^1.0.2",
+    "infojobs-next-auth-provider": "1.0.2",
     "next": "13.4.2",
-    "next-auth": "^4.22.1",
+    "next-auth": "4.22.1",
     "postcss": "8.4.23",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -29,6 +29,6 @@
     "typescript": "5.0.4"
   },
   "devDependencies": {
-    "ts-standard": "^12.0.2"
+    "ts-standard": "12.0.2"
   }
 }
