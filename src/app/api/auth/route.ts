@@ -1,13 +1,34 @@
+import InfojobsProvider from 'infojobs-next-auth-provider'
+import NextAuth from 'next-auth'
+
 const infoJobsId = process.env.INFOJOBS_ID ?? ''
-const infoJobsSecret = process.env.INFOJOBS_SECRET ?? ''
 const redirectUri = process.env.REDIRECT_URI ?? ''
+const scopes = process.env.SCOPES ?? ''
+const infoJobsSecret = process.env.INFOJOBS_SECRET ?? ''
 
-export async function POST (request: Request) {
-  const { searchParams } = new URL(request.url)
-  const code = searchParams.get('code') ?? ''
-  const encodedSecret = encodeURIComponent(infoJobsSecret)
+const handler = NextAuth({
+  providers: [
+    InfojobsProvider({
+      clientId: infoJobsId,
+      clientSecret: infoJobsSecret,
+      redirect_uri: redirectUri,
+      infojobs_scopes: scopes
+    })
+  ],
+  callbacks: {
+    async jwt ({ token, account }) {
+      if (account !== null) {
+        token.accesToken = account.access_token
+        token.refreshToken = account.refresh_token
+      }
+      return token
+    },
+    async session ({ session, token }) {
+      session.accessToken = token.accessToken
+      session.refreshToken = token.refreshToken
+      return session
+    }
+  }
+})
 
-  const res = await fetch(`https://www.infojobs.net/oauth/authorize?grant_type=authorization_code&code=${code}&client_id=${infoJobsId}&client_secret=${encodedSecret}&redirect_uri=${redirectUri}`)
-  const data = await res.json()
-  console.log({ data })
-}
+export { handler as GET, handler as POST }
