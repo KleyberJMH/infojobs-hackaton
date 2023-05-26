@@ -6,9 +6,11 @@ const redirectUri = process.env.REDIRECT_URI ?? ''
 const scopes = process.env.SCOPES ?? ''
 const infoJobsSecret = process.env.INFOJOBS_SECRET ?? ''
 
-interface Session {
-  accessToken?: string,
-  refreshToken?: string
+declare module 'next-auth' {
+  interface Session {
+    accessToken?: string,
+    refreshToken?: string
+  }
 }
 
 const handler = NextAuth({
