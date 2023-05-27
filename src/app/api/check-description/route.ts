@@ -21,30 +21,32 @@ async function getOfferDescriptionById (id: string) {
 }
 
 async function translate (message: string) {
-  const url = 'https://microsoft-translator-text.p.rapidapi.com/translate?to=es&api-version=3.0&textType=plain'
-  try {
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json',
-        'X-RapidAPI-Key': `${rapidApiKey}`,
-        'X-RapidAPI-Host': 'microsoft-translator-text.p.rapidapi.com'
-      },
-      body: JSON.stringify([
-        {
-          Text: `${message}`
-        }
-      ])
-    })
-
-    const { resultado } = await response.json()
-    console.log({ resultado })
-    return resultado
-  } catch (error) {
-    console.log(error)
-    return 'error'
+    const url = 'https://microsoft-translator-text.p.rapidapi.com/translate?to[0]=es&api-version=3.0&textType=plain&profanityAction=NoAction'
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-RapidAPI-Key': rapidApiKey,
+          'X-RapidAPI-Host': 'microsoft-translator-text.p.rapidapi.com'
+        },
+        body: JSON.stringify(
+            [
+                {
+                  Text: 'I would really like to drive your car around the block a few times.'
+                }
+              ]
+        )
+      })
+  
+      if (response.ok) {
+        const result = await response.json()
+        return result
+      }
+    } catch (err) {
+      console.error(err)
+    }
   }
-}
 
 export async function GET (request: Request) {
   const { searchParams } = new URL(request.url)
