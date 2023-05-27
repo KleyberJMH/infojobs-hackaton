@@ -102,7 +102,7 @@ async function translate (message: string) {
         
           const listOfTranslate = items.map(item => {
             const { translations } = item
-        return { translations: translation.text }
+        return { translations: translations.text }
               })
           console.log({listOfTranslate})
           return listOfTranslate
