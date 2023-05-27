@@ -40,7 +40,7 @@ async function translate (message: string) {
       })
   
       if (response.ok) {
-        console.log(response.data)
+        console.log(response.translations[0].text)
         const result = await response.json()
         return result
       }
