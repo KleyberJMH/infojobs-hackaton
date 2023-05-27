@@ -6,6 +6,63 @@ const cohereToken = process.env.COHERE_TOKEN ?? ''
 const rapidApiKey = process.env.RAPIDAPI_KEY ?? ''
 
 cohere.init(cohereToken)
+export interface APIResultTranslate {
+
+    detectedLanguage: DetectedLanguage;
+
+    translations:     Translation[];
+
+}
+
+export interface DetectedLanguage {
+
+    language: string;
+
+    score:    string;
+
+}
+
+export interface Translation {
+
+    text:            string;
+
+    transliteration: Transliteration;
+
+    to:              string;
+
+    alignment:       Alignment;
+
+    sentLen:         SentLen;
+
+}
+
+export interface Alignment {
+
+    proj: string;
+
+}
+
+export interface SentLen {
+
+    srcSentLen:   SrcSentLenElement[];
+
+    transSentLen: SrcSentLenElement[];
+
+}
+
+export interface SrcSentLenElement {
+
+    integer: string;
+
+}
+
+export interface Transliteration {
+
+    text:   string;
+
+    script: string;
+
+}
 
 async function getOfferDescriptionById (id: string) {
   const res = await fetch(`https://api.infojobs.net/api/7/offer/${id}`, {
@@ -40,9 +97,10 @@ async function translate (message: string) {
       })
   
       if (response.ok) {
-        console.log(response[0].translations[0].text)
-        const result = await response.json()
-        return result
+       
+        const { result } : { results: APIResultTranslate } = await response.json()
+        console.log({result})
+        return { result }
       }
     } catch (err) {
       console.error(err)
