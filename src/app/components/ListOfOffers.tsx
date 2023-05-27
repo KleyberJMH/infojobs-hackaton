@@ -1,6 +1,6 @@
 'use client'
 
-import { Card, Flex, Title, TextInput, Badge, Table, TableHead, TableRow, TableHeaderCell, TableBody, TableCell, Button, Icon } from '@tremor/react'
+import { Card, Flex, Title, TextInput, Badge, Table, Subtitle, TableHead, TableRow, TableHeaderCell, TableBody, TableCell, Button, Icon } from '@tremor/react'
 import { Offer } from '../types'
 import { Fragment, useState, useRef, useEffect } from 'react'
 import { getInfoJobsOffers } from '../services/getOffers'
@@ -57,6 +57,8 @@ export function ListOfOffers () {
 
   return (
     <Card>
+      <Subtitle>Inicia sesion para obtener una carta 100% personalizada.</Subtitle>
+      <Button size='xs'>Iniciar Sesion</Button>
       <Flex className='flex space-x-2'>
         <Flex className='flex-wrap space-x-2' justifyContent='start'>
           <Title className='shrink'>Ofertas de trabajo de InfoJobs</Title>
@@ -72,7 +74,6 @@ export function ListOfOffers () {
           }}
         />
       </Flex>
-      <a href={process.env.INFOJOBS_LOGIN_URL}>Login</a>
       <Table className='mt-6'>
         <TableHead>
           <TableRow>

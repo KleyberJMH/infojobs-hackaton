@@ -23,7 +23,6 @@ export default function RootLayout ({
             <strong className='font-semibold tracking-wider text-black/80'>Generador de cartas de presentación</strong>
           </h1>
         </header>
-
         {children}
       </body>
     </html>

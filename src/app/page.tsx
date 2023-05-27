@@ -1,5 +1,3 @@
-'use client'
-
 import { ListOfOffers } from './components/ListOfOffers'
 
 export default async function Home () {
@@ -9,7 +7,7 @@ export default async function Home () {
         <p className='font-bold'>Notificación</p>
         <p>Se ha copiado la carta en el portapapeles.</p>
       </div>
-      <main className='max-w-[1500px] px-4 mx-auto pb-24'>
+      <main className='max-w-[1500px] px-4 mx-auto pb-24 flex flex-col items-center justify-center space-y-4'>
         <ListOfOffers />
       </main>
     </>
