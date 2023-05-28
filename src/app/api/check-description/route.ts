@@ -105,7 +105,7 @@ async function translate (message: string) {
         return { ...translations }
               })
           console.log({listOfTranslate})
-          return listOfTranslate
+          return listOfTranslate.translations[0].text
       }
     } catch (err) {
       console.error(err)
