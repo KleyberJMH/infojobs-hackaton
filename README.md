@@ -8,6 +8,7 @@ Proyecto para la hackaton de infojobs y midudev.<br>
  - Lista de tareas
  - Tecnologías usadas
  - Instalacion
+ - Agradecimientos
 
 ## Idea💡
 Cómo usuario recurrente de infojobs he tenido el problema de no saber que escribir en las cartas de presentación que envío conjunto a mi CV, muchas veces ni siquiera adjunto una presentación, lo cual disminuye la posibilidad de llamar la atención de los reclutadores, por lo que decidí crear un generador de carta de presentaciòn de acuerdo a las habilidades del candidato y requerimientos de la oferta generado con IA (Cohere API).
@@ -28,6 +29,9 @@ Cómo usuario recurrente de infojobs he tenido el problema de no saber que escri
 - Tremor.<br>
 - API Infojobs. <br>
 - SDK Cohere.<br>
+- NextAuth. <br>
+- InfoJobs NextAuth Provider. <br>
+- API Microsoft Translate.
 
 ## Instalacion⚙️
 - Clona el repositorio.
@@ -47,3 +51,7 @@ INFOJOBS_TOKEN="TU API KEY"
 ```
 npm run dev
 ```
+
+## Agradecimientos💬
+Muchas gracias a toda la comunidad de Midudev ya que sin ella no podría haber logrado este proyecto en tan poco tiempo.
+Sobretodo a 2 personas que han estado desde el inicio @NoHaxito y @Rodri.dev son lo máximo chicos ✌🏼 a seguir moviendo las manitas ⚡
