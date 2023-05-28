@@ -6,62 +6,41 @@ const cohereToken = process.env.COHERE_TOKEN ?? ''
 const rapidApiKey = process.env.RAPIDAPI_KEY ?? ''
 
 cohere.init(cohereToken)
+
 export interface APIResultTranslate {
-
-    detectedLanguage: DetectedLanguage;
-
-    translations:     Translation[];
-
+  detectedLanguage: DetectedLanguage
+  translations: Translation[]
 }
 
 export interface DetectedLanguage {
-
-    language: string;
-
-    score:    string;
-
+  language: string
+  score: string
 }
 
 export interface Translation {
-
-    text:            string;
-
-    transliteration: Transliteration;
-
-    to:              string;
-
-    alignment:       Alignment;
-
-    sentLen:         SentLen;
-
+  text: string
+  transliteration: Transliteration
+  to: string
+  alignment: Alignment
+  sentLen: SentLen
 }
 
 export interface Alignment {
-
-    proj: string;
-
+  proj: string
 }
 
 export interface SentLen {
-
-    srcSentLen:   SrcSentLenElement[];
-
-    transSentLen: SrcSentLenElement[];
-
+  srcSentLen: SrcSentLenElement[]
+  transSentLen: SrcSentLenElement[]
 }
 
 export interface SrcSentLenElement {
-
-    integer: string;
-
+  integer: string
 }
 
 export interface Transliteration {
-
-    text:   string;
-
-    script: string;
-
+  text: string
+  script: string
 }
 
 async function getOfferDescriptionById (id: string) {
@@ -78,39 +57,38 @@ async function getOfferDescriptionById (id: string) {
 }
 
 async function translate (message: string) {
-    const url = 'https://microsoft-translator-text.p.rapidapi.com/translate?to[0]=es&api-version=3.0&textType=plain&profanityAction=NoAction'
-    try {
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-RapidAPI-Key': rapidApiKey,
-          'X-RapidAPI-Host': 'microsoft-translator-text.p.rapidapi.com'
-        },
-        body: JSON.stringify(
-            [
-                {
-                  Text: 'I would really like to drive your car around the block a few times.'
-                }
-              ]
-        )
+  const url = 'https://microsoft-translator-text.p.rapidapi.com/translate?to[0]=es&api-version=3.0&textType=plain&profanityAction=NoAction'
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-RapidAPI-Key': rapidApiKey,
+        'X-RapidAPI-Host': 'microsoft-translator-text.p.rapidapi.com'
+      },
+      body: JSON.stringify(
+        [
+          {
+            Text: 'I would really like to drive your car around the block a few times.'
+          }
+        ]
+      )
+    })
+
+    if (response.ok) {
+      const { items }: { items: APIResultTranslate[] } = await response.json()
+
+      const listOfTranslate = items.map(item => {
+        const { translations } = item
+        return { ...translations }
       })
-  
-      if (response.ok) {
-       
-        const { items } : { items: APIResultTranslate[] } = await response.json()
-        
-          const listOfTranslate = items.map(item => {
-            const { text } = item
-        return { text: translations[0].text }
-              })
-          console.log({listOfTranslate})
-          return listOfTranslate.translations[0].text
-      }
-    } catch (err) {
-      console.error(err)
+      console.log({ listOfTranslate })
+      return listOfTranslate
     }
+  } catch (err) {
+    console.error(err)
   }
+}
 
 export async function GET (request: Request) {
   const { searchParams } = new URL(request.url)
@@ -131,9 +109,9 @@ export async function GET (request: Request) {
   })
   const result: string = response.body.generations[0].text // Texto en ingles de cohere
   // Traducir
-  const resultado: string = await translate(result) // Envio el texto en ingles
-  console.log(`Resultado: ${resultado}`) // Muestra ''
-  const json = { message: `${resultado}` } // Entrega message: ''
+  console.log(await translate(result)) // Envio el texto en ingles
+  console.log(`Resultado: ${result}`) // Muestra ''
+  const json = { message: `${result}` } // Entrega message: ''
 
   try {
     return NextResponse.json(json)
