@@ -69,21 +69,15 @@ async function translate (message: string) {
       body: JSON.stringify(
         [
           {
-            Text: 'I would really like to drive your car around the block a few times.'
+            Text: `'${message}'`
           }
         ]
       )
     })
 
     if (response.ok) {
-      const { items }: { items: APIResultTranslate[] } = await response.json()
-
-      const listOfTranslate = items.map(item => {
-        const { translations } = item
-        return { ...translations }
-      })
-      console.log({ listOfTranslate })
-      return listOfTranslate
+      const item: APIResultTranslate[] = await response.json()
+      return item[0].translations[0].text
     }
   } catch (err) {
     console.error(err)
@@ -107,11 +101,10 @@ export async function GET (request: Request) {
     stop_sequences: [],
     return_likelihoods: 'NONE'
   })
-  const result: string = response.body.generations[0].text // Texto en ingles de cohere
+  const result: string = response.body.generations[0].text
   // Traducir
-  console.log(await translate(result)) // Envio el texto en ingles
-  console.log(`Resultado: ${result}`) // Muestra ''
-  const json = { message: `${result}` } // Entrega message: ''
+  const resultado = await translate(result)
+  const json = { message: `${resultado ?? ''}` }
 
   try {
     return NextResponse.json(json)
