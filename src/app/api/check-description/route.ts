@@ -77,6 +77,7 @@ async function translate (message: string) {
 
     if (response.ok) {
       const item: APIResultTranslate[] = await response.json()
+      console.log(item[0].translations[0].text)
       return item[0].translations[0].text
     }
   } catch (err) {
@@ -91,13 +92,17 @@ export async function GET (request: Request) {
   if (id == null) return new Response('Missing id', { status: 400 })
 
   const description: string = await getOfferDescriptionById(id)
-
+  const skills: string = ''
+  const fullname: string = ''
   const response = await cohere.generate({
     model: 'command-xlarge-nightly',
-    prompt: `Generate a cover letter for a job application. Highlight your relevant skills and experience, as well as your enthusiasm for the job. Make sure to mention how your experience and achievements align with the requirements of the job description and how you can contribute to the success of the company.\nUsing this description: '${description}'`,
-    max_tokens: 1000,
-    temperature: 0.5,
-    k: 342,
+    prompt: `Generate a cover letter for a job application for me. Highlight my relevant skills and experience, as well as my enthusiasm for the job. Make sure to mention how i can contribute to the success of the company.
+    Use this description: '${description}',
+    My name is ${fullname}
+    and this are my skills: '${skills}'`,
+    max_tokens: 800,
+    temperature: 0.3,
+    k: 20,
     stop_sequences: [],
     return_likelihoods: 'NONE'
   })
