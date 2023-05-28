@@ -101,8 +101,8 @@ async function translate (message: string) {
         const { items } : { items: APIResultTranslate[] } = await response.json()
         
           const listOfTranslate = items.map(item => {
-            const { translations } = item
-        return { translations }
+            const { translations[] } = item
+        return { translations[] }
               })
           console.log({listOfTranslate})
           return listOfTranslate
