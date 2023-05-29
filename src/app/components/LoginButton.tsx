@@ -9,7 +9,7 @@ export function LoginButton () {
       <>
         <Subtitle>Inicia sesion para obtener una carta 100% personalizada.
         </Subtitle>
-        <a href='/api/auth/sigin/infojobs'>
+        <a href='/api/auth/signin/infojobs'>
           <Button size='xs'>Iniciar Sesion
           </Button>
         </a>
