@@ -33,7 +33,6 @@ Cómo usuario recurrente de infojobs he tenido el problema de no saber que escri
 - SDK Cohere.<br>
 - NextAuth. <br>
 - InfoJobs NextAuth Provider. <br>
-- API Microsoft Translate.
 
 ## Instalacion⚙️
 - Clona el repositorio.
@@ -50,7 +49,6 @@ NODE_ENV="production"
 SCOPES="CANDIDATE_PROFILE_WITH_EMAIL,CV,CANDIDATE_READ_CURRICULUM_EXPERIENCE"
 REDIRECT_URI="TU CALLBACK URL"
 NEXTAUTH_SECRET="TU CLIENT SECRET DE INFOJOBS"
-INFOJOBS_SECRET="TU CLIENT SECRET DE INFOJOBS"
 INFOJOBS_ID="TU CLIENT ID DE INFOJOBS"
 INFOJOBS_TOKEN="TU API KEY"
 COHERE_TOKEN="TU API KEY"
