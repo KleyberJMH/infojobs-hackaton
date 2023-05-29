@@ -31,6 +31,7 @@ export async function GET (req: NextRequest) {
     }
   })
   const data = await resListCurriculums.json()
+  console.log({ data })
 
   const getPrincipalCurriculum = data.find((curriculum: ICurriculum) => curriculum.principal === true)
 
