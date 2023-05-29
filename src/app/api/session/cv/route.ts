@@ -19,6 +19,34 @@ export interface ICurriculum {
   incompleteSteps?: string[]
 }
 
+export interface APIResultSkills {
+  dataSkill: DataSkill;
+}
+
+export interface DataSkill {
+  expertise: Expertise[];
+  language:  Language[];
+}
+
+export interface Expertise {
+  skill: string;
+  level: Level;
+}
+
+export enum Level {
+  Alto = "alto",
+  Medio = "medio",
+}
+
+export interface Language {
+  id:       number;
+  writing:  string;
+  comments: string;
+  reading:  string;
+  speaking: string;
+}
+
+
 export async function GET (req: NextRequest) {
   const session = await getToken({ req, secret: CLIENT_SECRET })
   if (session == null) {
@@ -47,8 +75,10 @@ export async function GET (req: NextRequest) {
     }
   })
 
-  const dataSkill = await resSkills.json()
-
+  const dataSkill: APIResultSkills = await resSkills.json()
+  console.log(dataSkill.dataSkill.expertise[0].skill)
+  console.log(dataSkill.dataSkill.expertise[1].skill)
+  console.log(dataSkill.dataSkill.expertise[2].skill)
   return NextResponse.json({
     dataSkill
   })
