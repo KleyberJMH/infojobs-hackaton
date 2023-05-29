@@ -24,13 +24,6 @@ export const authOptions: NextAuthOptions = {
     })
   ],
   callbacks: {
-    async jwt ({ token, account }) {
-      if (account !== null) {
-        token.accesToken = account.access_token
-        token.refreshToken = account.refresh_token
-      }
-      return token
-    },
     async session ({ session, token }) {
       session.accessToken = token.accessToken as string
       session.refreshToken = token.refreshToken as string
