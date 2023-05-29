@@ -69,7 +69,7 @@ export async function GET (req: NextRequest) {
     }
   })
 
-  const { dataSkill }: APIResultSkills = await resSkills.json()
+  const dataSkill: APIResultSkills = await resSkills.json()
   return NextResponse.json({
     dataSkill
   })
