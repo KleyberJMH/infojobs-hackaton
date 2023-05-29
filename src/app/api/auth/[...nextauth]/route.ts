@@ -15,7 +15,6 @@ declare module 'next-auth' {
 }
 
 export const authOptions: NextAuthOptions = {
-  session: { strategy: 'jwt' },
   providers: [
     InfojobsProvider({
       clientId: infoJobsId,
@@ -25,13 +24,6 @@ export const authOptions: NextAuthOptions = {
     })
   ],
   callbacks: {
-    async jwt ({ token, account }) {
-      if (account !== null) {
-        token.accesToken = account.access_token
-        token.refreshToken = account.refresh_token
-      }
-      return token
-    },
     async session ({ session, token }) {
       session.accessToken = token.accessToken
       session.refreshToken = token.refreshToken
