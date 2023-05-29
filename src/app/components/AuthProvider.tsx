@@ -1,4 +1,5 @@
-import { SessionProvider } from "next-auth/react"
+import { SessionProvider } from 'next-auth/react'
+import { ReactNode } from 'react'
 
 export default function AuthProvider ({
   children,
@@ -7,5 +8,5 @@ export default function AuthProvider ({
   children: ReactNode
   session: any
 }) {
-  return <SessionProvider session={session} >{children}</SessionProvider>
+  return <SessionProvider session={session}>{children}</SessionProvider>
 }
