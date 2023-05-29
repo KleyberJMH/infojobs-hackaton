@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server'
 
 const BASE_URL = 'https://api.infojobs.net'
 const CURRICULUM_ENDPOINT = `${BASE_URL}/api/2/curriculum`
-const EXPERIENCE_ENDPOINT = (id: string) => `${BASE_URL}/api/2/curriculum/${id}/experience`
+const SKILL_ENDPOINT = (id: string) => `${BASE_URL}/api/2/curriculum/${id}/skill`
 const CLIENT_ID = process.env.INFOJOBS_ID ?? ''
 const CLIENT_SECRET = process.env.NEXTAUTH_SECRET ?? ''
 const BASIC_TOKEN = Buffer.from(`${CLIENT_ID}:${CLIENT_SECRET}`).toString(
@@ -41,15 +41,15 @@ export async function GET (req: NextRequest) {
 
   const curriculum = getPrincipalCurriculum
 
-  const resExperiences = await fetch(EXPERIENCE_ENDPOINT(curriculum.code), {
+  const resSkills = await fetch(SKILL_ENDPOINT(curriculum.code), {
     headers: {
       Authorization: `Basic ${BASIC_TOKEN},Bearer ${accessToken ?? ''}`
     }
   })
 
-  const dataExperience = await resExperiences.json()
+  const dataSkill = await resSkills.json()
 
   return NextResponse.json({
-    dataExperience
+    dataSkill
   })
 }
