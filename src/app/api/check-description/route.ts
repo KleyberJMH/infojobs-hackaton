@@ -7,7 +7,7 @@ const cohereToken = process.env.COHERE_TOKEN ?? ''
 cohere.init(cohereToken)
 
 async function getUserName () {
-  const res = await fetch('/api/session', {
+  const res = await fetch('https://infojobs-hackaton-kleyberjmh.vercel.app/api/session', {
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Basic ${infoJobsToken}`
