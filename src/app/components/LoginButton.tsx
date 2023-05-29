@@ -10,13 +10,13 @@ export function LoginButton () {
       <>
         <Subtitle>Inicia sesion para obtener una carta 100% personalizada.
         </Subtitle>
-        <Button onClick={async () => await signIn()} size='xs'>Iniciar Sesion</Button>
+        <Button onClick={async () => await signIn('infojobs')} size='xs'>Iniciar Sesion</Button>
       </>
     )
   } else {
     return (
       <>
-        <Subtitle>${data.user?.email ?? ''}
+        <Subtitle>{data.user?.email ?? ''}
         </Subtitle>
         <Button onClick={async () => await signOut()} size='xs'>Cerrar Sesion</Button>
       </>
