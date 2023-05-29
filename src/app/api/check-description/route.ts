@@ -68,7 +68,7 @@ async function translate (message: string) {
       },
       body: JSON.stringify(
         {
-          Text: `'${message}'`
+          Text: message
         }
       )
     })
