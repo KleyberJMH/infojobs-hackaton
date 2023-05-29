@@ -67,11 +67,9 @@ async function translate (message: string) {
         'X-RapidAPI-Host': 'microsoft-translator-text.p.rapidapi.com'
       },
       body: JSON.stringify(
-        [
-          {
-            Text: `'${message}'`
-          }
-        ]
+        {
+          Text: `'${message}'`
+        }
       )
     })
 
