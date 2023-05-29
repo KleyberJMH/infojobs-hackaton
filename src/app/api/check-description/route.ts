@@ -26,7 +26,7 @@ export async function GET (request: Request) {
   if (id == null) return new Response('Missing id', { status: 400 })
 
   const description: string = await getOfferDescriptionById(id)
-  const fullname: string = sessionStorage.user?.name
+  const fullname: string = ''
   const skills: string = ''
   const response = await cohere.generate({
     model: 'command-xlarge-nightly',
