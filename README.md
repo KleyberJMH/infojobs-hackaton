@@ -21,9 +21,9 @@ Cómo usuario recurrente de infojobs he tenido el problema de no saber que escri
 - ✅ Mejorar el prompt para que genere mejores cartas.<br>
 - ❗ Generar una carta de presentacion personalizada con la informacion del candidato.<br>
 - ⚠️ Traducir el resultado de la carta de presentación a español.<br>
-*Se intento hacer la traduccion pero las apis que se usaron no devolvian los valores esperados, por ese motivo se desistio la idea, pero usando OpenApi no se necesita traducir a español* <br>
+<font size='1'>*Se intento hacer la traduccion pero las apis que se usaron no devolvian los valores esperados, por ese motivo se desistio la idea, pero usando OpenApi no se necesita traducir a español*</font> <br>
 - ⚠️ Agregar paginación.<br>
-*Por motivos de tiempo la paginación se realizara post hackaton*<br>
+<font size='1'>*Por motivos de tiempo la paginación se realizara post hackaton*</font><br>
 
 ## Tecnologias utilizadas🚀
 - NextJs. <br>
