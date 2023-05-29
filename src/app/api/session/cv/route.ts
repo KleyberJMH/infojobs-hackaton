@@ -20,14 +20,14 @@ export interface ICurriculum {
 }
 
 export async function GET (req: NextRequest) {
-  const session = await getToken({ req, secret: process.env.NEXTAUTH_SECRET })
+  const session = await getToken({ req, secret: CLIENT_SECRET })
   if (session == null) {
     return new NextResponse('Unauthorized', { status: 401 })
   }
-  const { accessToken } = session
+  const accessToken = session.accessToken
   const resListCurriculums = await fetch(CURRICULUM_ENDPOINT, {
     headers: {
-      Authorization: `Basic ${BASIC_TOKEN},Bearer ${accessToken}`
+      Authorization: `Basic ${BASIC_TOKEN},Bearer ${accessToken ?? ''}`
     }
   })
   const data = await resListCurriculums.json()
@@ -43,7 +43,7 @@ export async function GET (req: NextRequest) {
 
   const resExperiences = await fetch(EXPERIENCE_ENDPOINT(curriculum.code), {
     headers: {
-      Authorization: `Basic ${BASIC_TOKEN},Bearer ${accessToken}`
+      Authorization: `Basic ${BASIC_TOKEN},Bearer ${accessToken ?? ''}`
     }
   })
 
