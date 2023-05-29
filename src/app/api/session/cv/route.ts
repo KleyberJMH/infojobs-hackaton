@@ -69,10 +69,10 @@ export async function GET (req: NextRequest) {
     }
   })
 
-  const dataSkill: APIResultSkills = await resSkills.json()
-  console.log(dataSkill.dataSkill.expertise[0].skill)
-  console.log(dataSkill.dataSkill.expertise[1].skill)
-  console.log(dataSkill.dataSkill.expertise[2].skill)
+  const { dataSkill }: APIResultSkills = await resSkills.json()
+  console.log(dataSkill.expertise[0].skill)
+  console.log(dataSkill.expertise[1].skill)
+  console.log(dataSkill.expertise[2].skill)
   return NextResponse.json({
     dataSkill
   })
