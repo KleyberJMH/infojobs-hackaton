@@ -1,6 +1,7 @@
 'use client'
 
 import { Button, Subtitle } from '@tremor/react'
+import { signIn } from 'next-auth/react'
 
 export function LoginButton () {
   const variableSession: string = 'unauthenticaed'
@@ -9,10 +10,7 @@ export function LoginButton () {
       <>
         <Subtitle>Inicia sesion para obtener una carta 100% personalizada.
         </Subtitle>
-        <a href='/api/auth/signin/infojobs'>
-          <Button size='xs'>Iniciar Sesion
-          </Button>
-        </a>
+        <Button onClick={async () => await signIn()} size='xs'>Iniciar Sesion</Button>
       </>
     )
   } else {
