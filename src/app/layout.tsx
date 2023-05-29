@@ -1,5 +1,5 @@
 import { Logo } from './components/Logo'
-import AuthProvider from './components/AuthProvider'
+import { AuthProvider } from './components/AuthProvider'
 import './globals.css'
 import { Inter } from 'next/font/google'
 
