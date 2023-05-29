@@ -15,6 +15,7 @@ declare module 'next-auth' {
 }
 
 export const authOptions: NextAuthOptions = {
+  session: { strategy: 'jwt' },
   providers: [
     InfojobsProvider({
       clientId: infoJobsId,
