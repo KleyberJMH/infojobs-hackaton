@@ -3,7 +3,6 @@ import cohere from 'cohere-ai'
 
 const infoJobsToken = process.env.INFOJOBS_TOKEN ?? ''
 const cohereToken = process.env.COHERE_TOKEN ?? ''
-const rapidApiKey = process.env.RAPIDAPI_KEY ?? ''
 
 cohere.init(cohereToken)
 
@@ -56,33 +55,6 @@ async function getOfferDescriptionById (id: string) {
   return description
 }
 
-async function translate (message: string) {
-  const url = 'https://microsoft-translator-text.p.rapidapi.com/translate?to[0]=es&api-version=3.0&textType=plain&profanityAction=NoAction'
-  try {
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-RapidAPI-Key': rapidApiKey,
-        'X-RapidAPI-Host': 'microsoft-translator-text.p.rapidapi.com'
-      },
-      body: JSON.stringify(
-        {
-          Text: message
-        }
-      )
-    })
-
-    if (response.ok) {
-      const item: APIResultTranslate[] = await response.json()
-      console.log(item[0].translations[0].text)
-      return item[0].translations[0].text
-    }
-  } catch (err) {
-    console.error(err)
-  }
-}
-
 export async function GET (request: Request) {
   const { searchParams } = new URL(request.url)
   const id = searchParams.get('id')
@@ -105,9 +77,7 @@ export async function GET (request: Request) {
     return_likelihoods: 'NONE'
   })
   const result: string = response.body.generations[0].text
-  // Traducir
-  const resultado = await translate(result)
-  const json = { message: `${resultado ?? ''}` }
+  const json = { message: `${result}` }
 
   try {
     return NextResponse.json(json)

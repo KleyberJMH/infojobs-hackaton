@@ -20,8 +20,10 @@ Cómo usuario recurrente de infojobs he tenido el problema de no saber que escri
 - ✅ Agregar búsqueda y filtro para encontrar mejor la oferta que busco.<br>
 - ✅ Mejorar el prompt para que genere mejores cartas.<br>
 - ❗ Generar una carta de presentacion personalizada con la informacion del candidato.<br>
-- ❗ Traducir el resultado de la carta de presentación a español.<br>
-- ❗ Agregar paginación.
+- ⚠️ Traducir el resultado de la carta de presentación a español.<br>
+*Se intento hacer la traduccion pero las apis que se usaron no devolvian los valores esperados, por ese motivo se desistio la idea, pero usando OpenApi no se necesita traducir a español* <br>
+- ⚠️ Agregar paginación.<br>
+*Por motivos de tiempo la paginación se realizara post hackaton*<br>
 
 ## Tecnologias utilizadas🚀
 - NextJs. <br>
@@ -60,4 +62,4 @@ npm run dev
 
 ## Agradecimientos💬
 Muchas gracias a toda la comunidad de Midudev ya que sin ella no podría haber logrado este proyecto en tan poco tiempo.
-Sobretodo a 2 personas que han estado desde el inicio @NoHaxito y @Rodri.dev son lo máximo chicos ✌🏼 a seguir moviendo las manitas ⚡
+Sobretodo a 2 personas que han estado desde el inicio @NoHaxito y [@Rodri.dev](https://github.com/RodriDev23) son lo máximo chicos ✌🏼 a seguir moviendo las manitas ⚡

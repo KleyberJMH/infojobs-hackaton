@@ -1,10 +1,11 @@
 'use client'
 
-import { Card, Flex, Title, TextInput, Badge, Table, Subtitle, TableHead, TableRow, TableHeaderCell, TableBody, TableCell, Button, Icon } from '@tremor/react'
+import { Card, Flex, Title, TextInput, Badge, Table, TableHead, TableRow, TableHeaderCell, TableBody, TableCell, Button, Icon } from '@tremor/react'
 import { Offer } from '../types'
 import { Fragment, useState, useRef, useEffect } from 'react'
 import { getInfoJobsOffers } from '../services/getOffers'
 import { Score } from './Score'
+import { LoginButton } from './LoginButton'
 import { SearchIcon } from '@heroicons/react/solid'
 
 const infoJobsToken = process.env.INFOJOBS_TOKEN ?? ''
@@ -57,8 +58,7 @@ export function ListOfOffers () {
 
   return (
     <Card>
-      <Subtitle>Inicia sesion para obtener una carta 100% personalizada.</Subtitle>
-      <Button size='xs'>Iniciar Sesion</Button>
+      <LoginButton />
       <Flex className='flex space-x-2'>
         <Flex className='flex-wrap space-x-2' justifyContent='start'>
           <Title className='shrink'>Ofertas de trabajo de InfoJobs</Title>

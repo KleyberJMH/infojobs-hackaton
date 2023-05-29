@@ -1,18 +1,23 @@
 'use client'
 
-import { useSession, signIn, signOut } from 'next-auth/react'
+import { Button, Subtitle } from '@tremor/react'
 
 export function LoginButton () {
-  const session = useSession()
-  if (session !== null) {
+  const variableSession: string = 'unauthenticaed'
+  if (variableSession !== 'authenticated') {
     return (
-      <button onClick={async () => await signOut()}>Cerrar sesion</button>
+      <>
+        <Subtitle>Inicia sesion para obtener una carta 100% personalizada.
+        </Subtitle>
+        <a href='/api/auth/sigin/infojobs'>
+          <Button size='xs'>Iniciar Sesion
+          </Button>
+        </a>
+      </>
+    )
+  } else {
+    return (
+      <Button size='xs'>Cerrar Sesion</Button>
     )
   }
-  return (
-    <>
-      Inicia sesion para obtener una carta personalizada. <br />
-      <button onClick={async () => await signIn()}>Iniciar sesion</button>
-    </>
-  )
 }

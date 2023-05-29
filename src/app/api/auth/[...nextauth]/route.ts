@@ -4,7 +4,7 @@ import NextAuth from 'next-auth'
 const infoJobsId = process.env.INFOJOBS_ID ?? ''
 const redirectUri = process.env.REDIRECT_URI ?? ''
 const scopes = process.env.SCOPES ?? ''
-const infoJobsSecret = process.env.INFOJOBS_SECRET ?? ''
+const infoJobsSecret = process.env.NEXTAUTH_SECRET ?? ''
 
 declare module 'next-auth' {
   interface Session {
