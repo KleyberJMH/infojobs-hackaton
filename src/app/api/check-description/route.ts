@@ -1,10 +1,21 @@
 import { NextResponse } from 'next/server'
 import cohere from 'cohere-ai'
+import { authOptions } from '../auth/[...nextauth]/route'
+import { getServerSession } from 'next-auth'
 
 const infoJobsToken = process.env.INFOJOBS_TOKEN ?? ''
 const cohereToken = process.env.COHERE_TOKEN ?? ''
 
 cohere.init(cohereToken)
+
+export async function getUserName (request: Request) {
+  const session = await getServerSession(authOptions)
+  console.log(session)
+  if (session === null) {
+    return 'User not loggedIn'
+  }
+  return session.user?.name
+}
 
 async function getOfferDescriptionById (id: string) {
   const res = await fetch(`https://api.infojobs.net/api/7/offer/${id}`, {
@@ -26,7 +37,7 @@ export async function GET (request: Request) {
   if (id == null) return new Response('Missing id', { status: 400 })
 
   const description: string = await getOfferDescriptionById(id)
-  const fullname: string = ''
+  const fullname: string = await getUserName(request) ?? ''
   const skills: string = ''
   const response = await cohere.generate({
     model: 'command-xlarge-nightly',
