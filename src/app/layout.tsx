@@ -11,16 +11,14 @@ export const metadata = {
 }
 
 export default function RootLayout ({
-  children,
-  session
+  children
 }: {
   children: React.ReactNode
-  session: any
 }) {
   return (
     <html lang='es'>
       <body className={inter.className}>
-        <AuthProvider session={session}>
+        <AuthProvider>
           <header className='py-10'>
             <h1 className='flex flex-col items-center justify-center text-lg'>
               <Logo />
