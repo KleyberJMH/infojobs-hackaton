@@ -16,7 +16,7 @@ export function LoginButton () {
   } else {
     return (
       <>
-        <Subtitle>${data.user?.email}
+        <Subtitle>${data.user?.email ?? ''}
         </Subtitle>
         <Button onClick={async () => await signOut()} size='xs'>Cerrar Sesion</Button>
       </>
