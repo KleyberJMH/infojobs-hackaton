@@ -4,7 +4,7 @@ import { Button, Subtitle } from '@tremor/react'
 import { useSession, signIn, signOut } from 'next-auth/react'
 
 export function LoginButton () {
-  const { status } = useSession()
+  const { data, status } = useSession()
   if (status !== 'authenticated') {
     return (
       <>
@@ -15,7 +15,11 @@ export function LoginButton () {
     )
   } else {
     return (
-      <Button onClick={async () => await signOut()} size='xs'>Cerrar Sesion</Button>
+      <>
+        <Subtitle>${data.user?.email}
+        </Subtitle>
+        <Button onClick={async () => await signOut()} size='xs'>Cerrar Sesion</Button>
+      </>
     )
   }
 }
