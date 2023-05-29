@@ -60,4 +60,4 @@ npm run dev
 
 ## Agradecimientos💬
 Muchas gracias a toda la comunidad de Midudev ya que sin ella no podría haber logrado este proyecto en tan poco tiempo.
-Sobretodo a 2 personas que han estado desde el inicio @NoHaxito y [@Rodri.dev](https://github.com/RodriDev23) son lo máximo chicos ✌🏼 a seguir moviendo las manitas ⚡
+Sobretodo a 2 personas que han estado desde el inicio [@NoHaxito](https://github.com/NoHaxito) y [@Rodri.dev](https://github.com/RodriDev23) son lo máximo chicos ✌🏼 a seguir moviendo las manitas ⚡
