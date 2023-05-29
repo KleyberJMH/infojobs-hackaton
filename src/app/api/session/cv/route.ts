@@ -30,12 +30,7 @@ export interface DataSkill {
 
 export interface Expertise {
   skill: string
-  level: Level
-}
-
-export enum Level {
-  Alto = 'alto',
-  Medio = 'medio',
+  level: string
 }
 
 export interface Language {
