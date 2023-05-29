@@ -20,32 +20,31 @@ export interface ICurriculum {
 }
 
 export interface APIResultSkills {
-  dataSkill: DataSkill;
+  dataSkill: DataSkill
 }
 
 export interface DataSkill {
-  expertise: Expertise[];
-  language:  Language[];
+  expertise: Expertise[]
+  language: Language[]
 }
 
 export interface Expertise {
-  skill: string;
-  level: Level;
+  skill: string
+  level: Level
 }
 
 export enum Level {
-  Alto = "alto",
-  Medio = "medio",
+  Alto = 'alto',
+  Medio = 'medio',
 }
 
 export interface Language {
-  id:       number;
-  writing:  string;
-  comments: string;
-  reading:  string;
-  speaking: string;
+  id: number
+  writing: string
+  comments: string
+  reading: string
+  speaking: string
 }
-
 
 export async function GET (req: NextRequest) {
   const session = await getToken({ req, secret: CLIENT_SECRET })
