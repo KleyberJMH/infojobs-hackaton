@@ -15,8 +15,9 @@ async function getUserName () {
   })
 
   const { user } = await res.json()
+  if (user === null) return
   console.log(user)
-  return user?.name
+  return user.name
 }
 
 async function getOfferDescriptionById (id: string) {
