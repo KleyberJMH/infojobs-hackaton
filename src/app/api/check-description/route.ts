@@ -81,8 +81,9 @@ export async function GET (request: Request) {
     })
 
     const dataSkill: APIResultSkills = await resSkills.json()
-    console.log(dataSkill)
+
     const textSkills: string = dataSkill.dataSkill?.expertise.map(({ skill }) => skill).join(', ')
+    console.log(`textSkills: ${textSkills}`)
     return textSkills
   }
 
