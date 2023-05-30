@@ -8,6 +8,37 @@ const cohereToken = process.env.COHERE_TOKEN ?? ''
 
 cohere.init(cohereToken)
 
+export interface ICurriculum {
+  id?: number
+  code?: string
+  name?: string
+  principal?: boolean
+  completed?: boolean
+  incompleteSteps?: string[]
+}
+
+export interface APIResultSkills {
+  dataSkill: DataSkill
+}
+
+export interface DataSkill {
+  expertise: Expertise[]
+  language: Language[]
+}
+
+export interface Expertise {
+  skill: string
+  level: string
+}
+
+export interface Language {
+  id: number
+  writing: string
+  comments: string
+  reading: string
+  speaking: string
+}
+
 async function getOfferDescriptionById (id: string) {
   const res = await fetch(`https://api.infojobs.net/api/7/offer/${id}`, {
     headers: {
@@ -25,12 +56,48 @@ export async function GET (request: Request) {
   const { searchParams } = new URL(request.url)
   const id = searchParams.get('id')
   const session = await getServerSession(authOptions)
+  const accessToken = session?.accessToken
+
+  async function getSkills () {
+    const resListCurriculums = await fetch('https://api.infojobs.net/api/2/curriculum', {
+      headers: {
+        Authorization: `Basic ${infoJobsToken},Bearer ${accessToken ?? ''}`
+      }
+    })
+    const data = await resListCurriculums.json()
+    console.log({ data })
+
+    const getPrincipalCurriculum = data.find((curriculum: ICurriculum) => curriculum.principal === true)
+    if (getPrincipalCurriculum === true) {
+      return new NextResponse('Unauthorized', { status: 401 })
+    }
+
+    const curriculum = getPrincipalCurriculum
+    const code: string = curriculum.code
+
+    const resSkills = await fetch(`https://api.infojobs.net/api/2/curriculum/${code}/skill`, {
+      headers: {
+        Authorization: `Basic ${infoJobsToken},Bearer ${accessToken ?? ''}`
+      }
+    })
+
+    const dataSkill: APIResultSkills = await resSkills.json()
+
+    console.log(dataSkill)
+
+    const textSkills: string = ''
+    console.log(textSkills)
+
+    return NextResponse.json({
+      dataSkill
+    })
+  }
 
   if (id == null) return new Response('Missing id', { status: 400 })
 
   const description: string = await getOfferDescriptionById(id)
   const fullname: string = session?.user.name ?? ''
-  console.log(fullname)
+  console.log(await getSkills())
   const skills: string = ''
   const response = await cohere.generate({
     model: 'command-xlarge-nightly',
