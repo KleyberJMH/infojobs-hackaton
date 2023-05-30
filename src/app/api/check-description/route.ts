@@ -65,7 +65,6 @@ export async function GET (request: Request) {
       }
     })
     const data = await resListCurriculums.json()
-    console.log({ data })
 
     const getPrincipalCurriculum = data.find((curriculum: ICurriculum) => curriculum.principal === true)
     if (getPrincipalCurriculum === true) {
@@ -82,11 +81,8 @@ export async function GET (request: Request) {
     })
 
     const dataSkill: APIResultSkills = await resSkills.json()
-
-    console.log({ dataSkill })
-    const textSkills: string = dataSkill.dataSkill.expertise.map(({ skill }) => skill).join(', ')
-    console.log(textSkills)
-
+    console.log(dataSkill)
+    const textSkills: string = dataSkill.dataSkill?.expertise.map(({ skill }) => skill).join(', ')
     return textSkills
   }
 
