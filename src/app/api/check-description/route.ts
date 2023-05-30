@@ -46,7 +46,9 @@ async function getOfferDescriptionById (id: string) {
       Authorization: `Basic ${infoJobsToken}`
     }
   })
+
   const { description } = await res.json()
+
   return description
 }
 
@@ -86,12 +88,12 @@ export async function GET (request: Request) {
   const description: string = await getOfferDescriptionById(id)
   const fullname: string = session?.user.name ?? '[Your Name]'
   const skills = await getSkills() ?? '[Your Skills]'
+  const skillsAndName = `, My name is ${fullname} and this are my skills: ${skills}`
   const response = await cohere.generate({
     model: 'command-xlarge-nightly',
     prompt: `Generate a cover letter for a job application for me. Highlight my relevant skills and experience, as well as my enthusiasm for the job. Make sure to mention how i can contribute to the success of the company.
-    Use this description: '${description}',
-    My name is ${fullname}
-    and this are my skills: '${skills}'`,
+    Use this description: '${description}'
+    ${skillsAndName}`,
     max_tokens: 800,
     temperature: 0.3,
     k: 20,
