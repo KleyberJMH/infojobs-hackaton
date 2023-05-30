@@ -56,7 +56,7 @@ export async function GET (request: Request) {
   const { searchParams } = new URL(request.url)
   const id = searchParams.get('id')
   const session = await getServerSession(authOptions)
-  const accessToken = session?.accessToken
+  const accessToken = session?.accessToken ?? ''
 
   async function getSkills () {
     const resListCurriculums = await fetch('https://api.infojobs.net/api/2/curriculum', {
@@ -85,7 +85,7 @@ export async function GET (request: Request) {
 
   const description: string = await getOfferDescriptionById(id)
   const fullname: string = session?.user.name ?? ''
-  const skills = (accessToken !== null) ? await getSkills() : ''
+  const skills = (accessToken !== '') ? await getSkills() : ''
   const response = await cohere.generate({
     model: 'command-xlarge-nightly',
     prompt: `Generate a cover letter for a job application for me. Highlight my relevant skills and experience, as well as my enthusiasm for the job. Make sure to mention how i can contribute to the success of the company.
