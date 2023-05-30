@@ -1,24 +1,12 @@
 import { NextResponse } from 'next/server'
+import { authOptions } from '../auth/[...nextauth]/route'
+import { getServerSession } from 'next-auth'
 import cohere from 'cohere-ai'
 
 const infoJobsToken = process.env.INFOJOBS_TOKEN ?? ''
 const cohereToken = process.env.COHERE_TOKEN ?? ''
 
 cohere.init(cohereToken)
-
-async function getUserName () {
-  const res = await fetch('https://infojobs-hackaton-kleyberjmh.vercel.app/api/session', {
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Basic ${infoJobsToken}`
-    }
-  })
-
-  const { user } = await res.json()
-  console.log(user)
-  if (user === null) return
-  return user?.name
-}
 
 async function getOfferDescriptionById (id: string) {
   const res = await fetch(`https://api.infojobs.net/api/7/offer/${id}`, {
@@ -36,11 +24,12 @@ async function getOfferDescriptionById (id: string) {
 export async function GET (request: Request) {
   const { searchParams } = new URL(request.url)
   const id = searchParams.get('id')
+  const session = await getServerSession(authOptions)
 
   if (id == null) return new Response('Missing id', { status: 400 })
 
   const description: string = await getOfferDescriptionById(id)
-  const fullname: string = await getUserName()
+  const fullname: string = session?.user.name ?? ''
   console.log(fullname)
   const skills: string = ''
   const response = await cohere.generate({
