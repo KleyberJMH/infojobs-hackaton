@@ -87,9 +87,7 @@ export async function GET (request: Request) {
     const textSkills: string = dataSkill.dataSkill.expertise.map(({ skill }) => skill).join(', ')
     console.log(textSkills)
 
-    return NextResponse.json({
-      textSkills
-    })
+    return textSkills
   }
 
   if (id == null) return new Response('Missing id', { status: 400 })
