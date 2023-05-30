@@ -67,9 +67,6 @@ export async function GET (request: Request) {
     const data = await resListCurriculums.json()
 
     const getPrincipalCurriculum = data.find((curriculum: ICurriculum) => curriculum.principal === true)
-    if (getPrincipalCurriculum === true) {
-      return new NextResponse('Unauthorized', { status: 401 })
-    }
 
     const curriculum = getPrincipalCurriculum
     const code: string = curriculum.code
@@ -88,8 +85,7 @@ export async function GET (request: Request) {
 
   const description: string = await getOfferDescriptionById(id)
   const fullname: string = session?.user.name ?? ''
-  const skills = await getSkills() ?? ''
-  console.log(skills)
+  const skills = (accessToken !== null) ? await getSkills() : ''
   const response = await cohere.generate({
     model: 'command-xlarge-nightly',
     prompt: `Generate a cover letter for a job application for me. Highlight my relevant skills and experience, as well as my enthusiasm for the job. Make sure to mention how i can contribute to the success of the company.
