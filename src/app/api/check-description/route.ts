@@ -39,7 +39,7 @@ export async function GET (request: Request) {
   if (id == null) return new Response('Missing id', { status: 400 })
 
   const description: string = await getOfferDescriptionById(id)
-  const fullname: string = await getUserName() ?? 'MyName'
+  const fullname: string = await getUserName() ?? ''
   console.log(fullname)
   const skills: string = ''
   const response = await cohere.generate({
