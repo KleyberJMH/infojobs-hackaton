@@ -83,7 +83,7 @@ export async function GET (request: Request) {
 
     const dataSkill: APIResultSkills = await resSkills.json()
 
-    console.log(dataSkill.dataSkill.expertise.length)
+    console.log({ dataSkill })
 
     const textSkills: string = ''
     console.log(textSkills)
