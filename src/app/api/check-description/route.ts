@@ -83,7 +83,7 @@ export async function GET (request: Request) {
 
     const dataSkill: APIResultSkills = await resSkills.json()
 
-    console.log({ dataSkill })
+    console.log(`Dentro de getCV: ${dataSkill.dataSkill.expertise[0].skill}`)
 
     const textSkills: string = ''
     console.log(textSkills)
