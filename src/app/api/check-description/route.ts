@@ -79,11 +79,8 @@ export async function GET (request: Request) {
         Authorization: `Basic ${infoJobsToken},Bearer ${accessToken ?? ''}`
       }
     })
-
     const dataSkill: DataSkill = await resSkills.json()
-
     const textSkills: string = dataSkill.expertise.map(({ skill }) => skill).join(', ')
-    console.log(`textSkills: ${textSkills}`)
     return textSkills
   }
 
@@ -91,8 +88,8 @@ export async function GET (request: Request) {
 
   const description: string = await getOfferDescriptionById(id)
   const fullname: string = session?.user.name ?? ''
-  console.log(await getSkills())
-  const skills: string = ''
+  const skills = await getSkills() ?? ''
+  console.log(skills)
   const response = await cohere.generate({
     model: 'command-xlarge-nightly',
     prompt: `Generate a cover letter for a job application for me. Highlight my relevant skills and experience, as well as my enthusiasm for the job. Make sure to mention how i can contribute to the success of the company.
