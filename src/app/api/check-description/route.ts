@@ -14,9 +14,9 @@ async function getUserName () {
     }
   })
 
-  const { session } = await res.json()
-  console.log(session)
-  return session.user?.name
+  const { user } = await res.json()
+  console.log(user)
+  return user?.name
 }
 
 async function getOfferDescriptionById (id: string) {
