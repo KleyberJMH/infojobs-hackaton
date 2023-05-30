@@ -95,8 +95,8 @@ export async function GET (request: Request) {
     Use this description: '${description}'
     ${skillsAndName}`,
     max_tokens: 300,
-    temperature: 0.2,
-    k: 1,
+    temperature: 0.5,
+    k: 10,
     stop_sequences: [],
     return_likelihoods: 'NONE'
   })
