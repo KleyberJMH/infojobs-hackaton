@@ -15,7 +15,7 @@ async function getUserName () {
   })
 
   const { user } = await res.json()
-  console.log(await res.json())
+  console.log(user)
   if (user === null) return
   return user?.name
 }
