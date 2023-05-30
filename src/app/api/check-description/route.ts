@@ -59,33 +59,35 @@ export async function GET (request: Request) {
   const accessToken = session?.accessToken ?? ''
 
   async function getSkills () {
-    const resListCurriculums = await fetch('https://api.infojobs.net/api/2/curriculum', {
-      headers: {
-        Authorization: `Basic ${infoJobsToken},Bearer ${accessToken ?? ''}`
-      }
-    })
-    const data = await resListCurriculums.json()
+    if (accessToken !== '') {
+      const resListCurriculums = await fetch('https://api.infojobs.net/api/2/curriculum', {
+        headers: {
+          Authorization: `Basic ${infoJobsToken},Bearer ${accessToken ?? ''}`
+        }
+      })
+      const data = await resListCurriculums.json()
 
-    const getPrincipalCurriculum = data.find((curriculum: ICurriculum) => curriculum.principal === true)
+      const getPrincipalCurriculum = data.find((curriculum: ICurriculum) => curriculum.principal === true)
 
-    const curriculum = getPrincipalCurriculum
-    const code: string = curriculum.code
+      const curriculum = getPrincipalCurriculum
+      const code: string = curriculum.code
 
-    const resSkills = await fetch(`https://api.infojobs.net/api/2/curriculum/${code}/skill`, {
-      headers: {
-        Authorization: `Basic ${infoJobsToken},Bearer ${accessToken ?? ''}`
-      }
-    })
-    const dataSkill: DataSkill = await resSkills.json()
-    const textSkills: string = dataSkill.expertise.map(({ skill }) => skill).join(', ')
-    return textSkills
+      const resSkills = await fetch(`https://api.infojobs.net/api/2/curriculum/${code}/skill`, {
+        headers: {
+          Authorization: `Basic ${infoJobsToken},Bearer ${accessToken ?? ''}`
+        }
+      })
+      const dataSkill: DataSkill = await resSkills.json()
+      const textSkills: string = dataSkill.expertise.map(({ skill }) => skill).join(', ')
+      return textSkills
+    }
   }
 
   if (id == null) return new Response('Missing id', { status: 400 })
 
   const description: string = await getOfferDescriptionById(id)
   const fullname: string = session?.user.name ?? '[Your Name]'
-  const skills = (accessToken !== '') ? await getSkills() : '[My Skills]'
+  const skills = await getSkills() ?? '[Your Skills]'
   const response = await cohere.generate({
     model: 'command-xlarge-nightly',
     prompt: `Generate a cover letter for a job application for me. Highlight my relevant skills and experience, as well as my enthusiasm for the job. Make sure to mention how i can contribute to the success of the company.
