@@ -19,7 +19,7 @@ Cómo usuario recurrente de infojobs he tenido el problema de no saber que escri
 - ✅ Agregar boton de copiado rapido "Copy on clipboard".<br>
 - ✅ Agregar búsqueda y filtro para encontrar mejor la oferta que busco.<br>
 - ✅ Mejorar el prompt para que genere mejores cartas.<br>
-- ❗ Generar una carta de presentacion personalizada con la informacion del candidato.<br>
+- ✅ Generar una carta de presentacion personalizada con la informacion del candidato.<br>
 - ⚠️ Traducir el resultado de la carta de presentación a español.<br>
 <font size='1'>*Se intento hacer la traduccion pero las apis que se usaron no devolvian los valores esperados, por ese motivo se desistio la idea, pero usando OpenApi no se necesita traducir a español*</font> <br>
 - ⚠️ Agregar paginación.<br>
