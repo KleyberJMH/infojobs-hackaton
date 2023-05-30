@@ -94,9 +94,9 @@ export async function GET (request: Request) {
     prompt: `Generate a cover letter for a job application for me. Highlight my relevant skills and experience, as well as my enthusiasm for the job. Make sure to mention how i can contribute to the success of the company.
     Use this description: '${description}'
     ${skillsAndName}`,
-    max_tokens: 800,
-    temperature: 0.3,
-    k: 20,
+    max_tokens: 300,
+    temperature: 0.2,
+    k: 1,
     stop_sequences: [],
     return_likelihoods: 'NONE'
   })
