@@ -40,6 +40,7 @@ export async function GET (request: Request) {
 
   const description: string = await getOfferDescriptionById(id)
   const fullname: string = await getUserName() ?? ''
+  console.log(fullname)
   const skills: string = ''
   const response = await cohere.generate({
     model: 'command-xlarge-nightly',
