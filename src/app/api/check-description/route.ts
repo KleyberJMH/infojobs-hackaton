@@ -80,9 +80,9 @@ export async function GET (request: Request) {
       }
     })
 
-    const dataSkill: APIResultSkills = await resSkills.json()
+    const dataSkill: DataSkill = await resSkills.json()
 
-    const textSkills: string = dataSkill.dataSkill?.expertise.map(({ skill }) => skill).join(', ')
+    const textSkills: string = dataSkill.expertise.map(({ skill }) => skill).join(', ')
     console.log(`textSkills: ${textSkills}`)
     return textSkills
   }
