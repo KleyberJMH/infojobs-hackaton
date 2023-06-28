@@ -1,8 +1,8 @@
-# Hackaton Infojobs 2023
+# Hackathon Infojobs 2023
 ![](https://api.checklyhq.com/v1/badges/checks/d94b200b-8628-4f99-894f-e2dcf907f872?style=for-the-badge&theme=dark) <br><br>
 [![](https://img.shields.io/badge/-Demo-lightgreen?style=for-the-badge&theme=dark)](https://infojobs-hackaton-kleyberjmh.vercel.app/)
 
-Proyecto para la hackaton de infojobs y midudev.<br>
+Uno de los 15 proyectos seleccionados por infojobs para la hackathon.<br>
 ## Tabla de contenido
  - Idea
  - Lista de tareas
